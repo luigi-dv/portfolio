@@ -2,6 +2,8 @@ import React from 'react';
 
 import type { Metadata } from 'next';
 
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Instrument_Sans, Unbounded } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
@@ -45,6 +47,8 @@ export default function RootLayout({
         <ThemeProvider attribute='class' defaultTheme='light'>
           <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

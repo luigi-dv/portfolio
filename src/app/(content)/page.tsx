@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 
-import Link from 'next/link';
 import { formatPeriod } from '@/utilities/date';
 import { renderInline } from '@/utilities/markdown';
 import { DownloadIcon, MapPinIcon } from 'lucide-react';
@@ -12,6 +11,7 @@ import { Section } from '@/components/Section';
 import { Ventures } from '@/components/Ventures';
 import { getWorkData } from '@/services/workService';
 import { ProjectList } from '@/components/ProjectList';
+import { TrackedLink } from '@/components/TrackedLink';
 import { buttonVariants } from '@/components/ui/button';
 import { getProjects } from '@/services/projectService';
 import { PersonJsonLd } from '@/components/PersonJsonLd';
@@ -83,14 +83,18 @@ const Home = async () => {
           </Avatar>
         </div>
         <div className='flex flex-wrap gap-2'>
-          <a
+          <TrackedLink
+            event='Email click'
+            eventData={{ location: 'hero' }}
             href={`mailto:${profile.email}`}
             className={cn(buttonVariants(), 'gap-2')}
           >
             <Icons.email className='size-4' aria-hidden='true' />
             Email me
-          </a>
-          <a
+          </TrackedLink>
+          <TrackedLink
+            event='LinkedIn click'
+            eventData={{ location: 'hero' }}
             href={profile.linkedinUrl}
             target='_blank'
             rel='noopener noreferrer'
@@ -98,8 +102,10 @@ const Home = async () => {
           >
             <Icons.linkedin className='size-4' aria-hidden='true' />
             LinkedIn
-          </a>
-          <a
+          </TrackedLink>
+          <TrackedLink
+            event='GitHub click'
+            eventData={{ location: 'hero' }}
             href={profile.githubUrl}
             target='_blank'
             rel='noopener noreferrer'
@@ -107,15 +113,17 @@ const Home = async () => {
           >
             <Icons.github className='size-4' aria-hidden='true' />
             GitHub
-          </a>
-          <a
+          </TrackedLink>
+          <TrackedLink
+            event='CV download'
+            eventData={{ location: 'hero' }}
             href={profile.cvUrl}
             download
             className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
           >
             <DownloadIcon className='size-4' aria-hidden='true' />
             Download CV
-          </a>
+          </TrackedLink>
         </div>
         <div className='space-y-3 text-sm sm:text-base text-muted-foreground text-pretty max-w-prose'>
           {profile.summary.map((paragraph) => (
@@ -240,13 +248,15 @@ const Home = async () => {
           I&apos;m based in Warsaw and work remotely with teams across Europe.
           Email is the fastest way to reach me.
         </p>
-        <Link
+        <TrackedLink
+          event='Email click'
+          eventData={{ location: 'contact' }}
           href={`mailto:${profile.email}`}
           className={cn(buttonVariants({ size: 'lg' }), 'mt-5 w-fit gap-2')}
         >
           <Icons.email className='size-4' aria-hidden='true' />
           {profile.email}
-        </Link>
+        </TrackedLink>
       </Section>
     </>
   );

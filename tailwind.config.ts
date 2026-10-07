@@ -21,9 +21,6 @@ const config: Config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'cell-in': 'cell-in 0.5s ease-out both',
-        marquee: 'marquee var(--duration) linear infinite',
-        'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
-        meteor: 'meteor 5s linear infinite',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -81,22 +78,6 @@ const config: Config = {
         'cell-in': {
           from: { opacity: '0' },
           to: { opacity: '1' },
-        },
-        marquee: {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
-        },
-        'marquee-vertical': {
-          from: { transform: 'translateY(0)' },
-          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
-        },
-        meteor: {
-          '0%': { opacity: '1', transform: 'rotate(215deg) translateX(0)' },
-          '100%': {
-            opacity: '0',
-            transform: 'rotate(215deg) translateX(-500px)',
-          },
-          '70%': { opacity: '1' },
         },
       },
     },

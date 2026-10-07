@@ -7,6 +7,7 @@ import { formatMonth, formatPeriod } from '@/utilities/date';
 
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import { TrackedLink } from '@/components/TrackedLink';
 import { buttonVariants } from '@/components/ui/button';
 import { Ventures as VenturesData, VentureProduct } from '@/types/Venture';
 
@@ -82,7 +83,9 @@ const ProductCard = ({ product }: { product: VentureProduct }) => (
         </ul>
         <div className='flex flex-wrap gap-2'>
           {product.appStoreUrl && (
-            <a
+            <TrackedLink
+              event='App Store click'
+              eventData={{ product: product.name }}
               href={product.appStoreUrl}
               target='_blank'
               rel='noopener noreferrer'
@@ -93,9 +96,11 @@ const ProductCard = ({ product }: { product: VentureProduct }) => (
             >
               Get the iOS app
               <ArrowUpRightIcon className='size-3.5' aria-hidden='true' />
-            </a>
+            </TrackedLink>
           )}
-          <a
+          <TrackedLink
+            event='Product site click'
+            eventData={{ product: product.name }}
             href={product.href}
             target='_blank'
             rel='noopener noreferrer'
@@ -103,7 +108,7 @@ const ProductCard = ({ product }: { product: VentureProduct }) => (
           >
             {product.linkLabel}
             <ArrowUpRightIcon className='size-3.5' aria-hidden='true' />
-          </a>
+          </TrackedLink>
         </div>
       </div>
     </div>
