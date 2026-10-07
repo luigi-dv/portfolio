@@ -80,15 +80,31 @@ const ProductCard = ({ product }: { product: VentureProduct }) => (
             </li>
           ))}
         </ul>
-        <a
-          href={product.href}
-          target='_blank'
-          rel='noopener noreferrer'
-          className={cn(buttonVariants({ size: 'sm' }), 'gap-1')}
-        >
-          {product.linkLabel}
-          <ArrowUpRightIcon className='size-3.5' aria-hidden='true' />
-        </a>
+        <div className='flex flex-wrap gap-2'>
+          {product.appStoreUrl && (
+            <a
+              href={product.appStoreUrl}
+              target='_blank'
+              rel='noopener noreferrer'
+              className={cn(
+                buttonVariants({ size: 'sm', variant: 'outline' }),
+                'gap-1'
+              )}
+            >
+              Get the iOS app
+              <ArrowUpRightIcon className='size-3.5' aria-hidden='true' />
+            </a>
+          )}
+          <a
+            href={product.href}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={cn(buttonVariants({ size: 'sm' }), 'gap-1')}
+          >
+            {product.linkLabel}
+            <ArrowUpRightIcon className='size-3.5' aria-hidden='true' />
+          </a>
+        </div>
       </div>
     </div>
   </article>

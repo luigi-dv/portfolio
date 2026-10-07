@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 
 import Link from 'next/link';
-import { MapPinIcon } from 'lucide-react';
 import { formatPeriod } from '@/utilities/date';
 import { renderInline } from '@/utilities/markdown';
+import { DownloadIcon, MapPinIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
@@ -14,6 +14,8 @@ import { getWorkData } from '@/services/workService';
 import { ProjectList } from '@/components/ProjectList';
 import { buttonVariants } from '@/components/ui/button';
 import { getProjects } from '@/services/projectService';
+import { PersonJsonLd } from '@/components/PersonJsonLd';
+import { getContactData } from '@/services/contactService';
 import { getProfileData } from '@/services/profileService';
 import { getVentureData } from '@/services/ventureService';
 import { getEducationData } from '@/services/educationService';
@@ -25,16 +27,28 @@ import { CodeActivity, CodeActivitySkeleton } from '@/components/CodeActivity';
 export const revalidate = 3600;
 
 const Home = async () => {
-  const [profile, work, projects, ventures, educationData] = await Promise.all([
-    getProfileData(),
-    getWorkData(),
-    getProjects(),
-    getVentureData(),
-    getEducationData(),
-  ]);
+  const [profile, work, projects, ventures, educationData, contactData] =
+    await Promise.all([
+      getProfileData(),
+      getWorkData(),
+      getProjects(),
+      getVentureData(),
+      getEducationData(),
+      getContactData(),
+    ]);
+
+  const sameAs = Object.values(contactData?.contact.social ?? {})
+    .map((social) => social.url)
+    .filter((url) => url.startsWith('https://'));
 
   return (
     <>
+      <PersonJsonLd
+        profile={profile}
+        currentWork={work[0]}
+        education={educationData.education}
+        sameAs={sameAs}
+      />
       <header className='space-y-8'>
         <div className='flex items-start justify-between gap-6'>
           <div className='space-y-4'>
@@ -48,6 +62,15 @@ const Home = async () => {
               <MapPinIcon className='size-3.5' aria-hidden='true' />
               {profile.location}
             </p>
+            {profile.availability && (
+              <p className='flex items-start gap-2 text-sm'>
+                <span
+                  className='mt-1.5 size-2 shrink-0 rounded-full bg-emerald-500'
+                  aria-hidden='true'
+                />
+                {profile.availability}
+              </p>
+            )}
           </div>
           <Avatar className='size-20 sm:size-28 shrink-0 border'>
             <AvatarImage
@@ -84,6 +107,14 @@ const Home = async () => {
           >
             <Icons.github className='size-4' aria-hidden='true' />
             GitHub
+          </a>
+          <a
+            href={profile.cvUrl}
+            download
+            className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
+          >
+            <DownloadIcon className='size-4' aria-hidden='true' />
+            Download CV
           </a>
         </div>
         <div className='space-y-3 text-sm sm:text-base text-muted-foreground text-pretty max-w-prose'>

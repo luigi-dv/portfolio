@@ -3,7 +3,7 @@
     "name": "Ldvloper",
     "href": "https://ldvloper.com",
     "logoUrl": "/images/ventures/ldvloper-icon.png",
-    "role": "Founder",
+    "role": "Founder & Principal Engineer",
     "start": "2025-04",
     "location": "Warsaw, Poland",
     "description": "A European software studio. I use it to contract with clients on a B2B basis and to build my own products.",
@@ -27,6 +27,7 @@
       "name": "Syncflow",
       "href": "https://syncflow.me",
       "linkLabel": "Visit syncflow.me",
+      "appStoreUrl": "https://apps.apple.com/us/app/syncflow-ai-goal-planner/id6792511758",
       "iconUrl": "/images/ventures/syncflow-icon.png",
       "imageUrl": "/images/ventures/syncflow-og.png",
       "imageAlt": "Syncflow web app showing one step of a goal: Develop pre-launch content, 45 minutes",
@@ -34,9 +35,18 @@
       "start": "2026-07",
       "tagline": "An AI goal planner that breaks any goal into small, time-estimated steps and hands them to you one at a time.",
       "highlights": [
-        { "value": "500+", "label": "users in the first month" },
-        { "value": "Web + iOS", "label": "live on the App Store" },
-        { "value": "Solo", "label": "design, build and launch" }
+        {
+          "value": "500+",
+          "label": "users in the first month"
+        },
+        {
+          "value": "Web + iOS",
+          "label": "live on the App Store"
+        },
+        {
+          "value": "Solo",
+          "label": "design, build and launch"
+        }
       ],
       "bullets": [
         "Built the web app and native iOS app (Swift/SwiftUI) end to end, from product design to launch",

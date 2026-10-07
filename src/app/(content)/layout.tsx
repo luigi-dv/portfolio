@@ -20,7 +20,7 @@ export default async function HomeLayout({
   const contactData = await getContactData();
 
   return (
-    <>
+    <div className='max-w-2xl mx-auto pt-12 pb-32 sm:pt-24 px-6'>
       <main id='top' className='flex flex-col min-h-[100dvh] gap-y-20'>
         {children}
       </main>
@@ -30,6 +30,6 @@ export default async function HomeLayout({
           contact={contactData.contact}
         />
       )}
-    </>
+    </div>
   );
 }

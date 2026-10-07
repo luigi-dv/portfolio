@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     type: 'profile',
   },
   title: 'Luigelo Davila | Full-stack engineer',
+  twitter: { card: 'summary_large_image' },
 };
 
 export default function RootLayout({
@@ -36,7 +37,7 @@ export default function RootLayout({
     <html lang='en' data-scroll-behavior='smooth' suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto pt-12 pb-32 sm:pt-24 px-6',
+          'min-h-screen bg-background font-sans antialiased',
           display.variable,
           sans.variable
         )}

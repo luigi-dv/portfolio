@@ -14,6 +14,7 @@ export interface VentureProduct {
   name: string;
   href: string;
   linkLabel: string;
+  appStoreUrl?: string;
   iconUrl: string;
   imageUrl: string;
   imageAlt: string;

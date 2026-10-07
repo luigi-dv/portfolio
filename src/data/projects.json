@@ -14,7 +14,8 @@
       "year": "2025–now",
       "outcome": "Native app for bol.com sellers that I own end to end, live on the App Store with passkey sign-in, sales dashboards and an AI assistant.",
       "stack": ["Swift", "SwiftUI", "Passkeys"],
-      "private": true
+      "private": true,
+      "href": "https://apps.apple.com/nl/app/zoloo/id1548700832"
     },
     {
       "title": "Applus+ Client Area",

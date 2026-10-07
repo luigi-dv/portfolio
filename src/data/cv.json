@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "fileName": "Luigelo-Davila-CV.pdf",
+    "pageLimit": 2,
+    "showPhoto": true
+  },
+  "basics": {
+    "name": "Luigelo Davila",
+    "headline": "Senior Full-Stack Engineer (Web, iOS & Cloud)",
+    "location": "Warsaw, Poland",
+    "availability": "Open to remote roles across the EU and B2B contracts",
+    "photoUrl": "/images/avatar.png",
+    "links": [
+      {
+        "label": "luigelo@ldvloper.com",
+        "href": "mailto:luigelo@ldvloper.com"
+      },
+      {
+        "label": "luigelo.ldvloper.com",
+        "href": "https://luigelo.ldvloper.com"
+      },
+      {
+        "label": "linkedin.com/in/luigelo-davila",
+        "href": "https://www.linkedin.com/in/luigelo-davila/"
+      },
+      { "label": "github.com/luigi-dv", "href": "https://github.com/luigi-dv" }
+    ]
+  },
+  "summary": "Senior full-stack engineer with 5+ years taking products from architecture to production across web, native iOS, Python backends and AWS/Azure cloud. At **Zoloo**, a SaaS platform for bol.com sellers (€2.5B+ in member sales, 20,000+ orders a day), I own the native iOS app and lead the move from a monolith to microservices, including 40M+ records migrated with zero data loss in production. As founder of **Ldvloper**, I designed, built and launched **Syncflow**, an AI goal planner on web and iOS that reached 500+ users in its first month.",
+  "experience": [
+    {
+      "company": "Zoloo (formerly Boloo)",
+      "context": "SaaS platform for bol.com sellers",
+      "location": "Netherlands, remote",
+      "roles": [
+        {
+          "title": "Senior Software Engineer (Mobile & Full-Stack)",
+          "note": "B2B contract via Ldvloper",
+          "start": "2025-07",
+          "end": null,
+          "bullets": [
+            "Lead the migration of core business domains from a monolith to microservices (Python, FastAPI, Celery, RabbitMQ, MySQL), moving **40M+ historical records with zero data loss** while the platform stayed live",
+            "Own the **native iOS app** (Swift/SwiftUI) end to end, live on the App Store, including passkey authentication, sales dashboards and an AI assistant",
+            "Improved production reliability and data integrity through monitoring, incremental rollouts and fixes to long-standing concurrency issues",
+            "Ship features across the full stack: backend services, the React web dashboard and bol.com platform integrations",
+            "Maintain CI/CD and AWS infrastructure with GitLab CI; hardened platform security with rate limiting, a WAF and email authentication"
+          ]
+        },
+        {
+          "title": "Software Engineer (Full-Stack)",
+          "start": "2024-07",
+          "end": "2025-06",
+          "bullets": [
+            "Led development of the cross-platform mobile app in React Native/Expo, integrated with internal APIs",
+            "Built message-driven backend microservices for product synchronization, seller reporting and task automation",
+            "Automated deployments and monitoring on AWS (CloudFormation, ECS, CloudWatch)"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Ldvloper",
+      "context": "Software studio, own company",
+      "location": "Warsaw, Poland",
+      "roles": [
+        {
+          "title": "Founder & Principal Engineer",
+          "start": "2025-04",
+          "end": null,
+          "intro": "Studio through which I contract with clients on a B2B basis and build my own products.",
+          "bullets": [
+            "Built and launched **Syncflow** (syncflow.me), an AI goal planner on web and native iOS, as sole engineer from product design to App Store release; **500+ users in its first month**",
+            "Integrated four LLM providers (Claude, ChatGPT, Groq, Grok) with bring-your-own-key support, plus calendar sync with Apple, Google and Outlook and daily step emails",
+            "Designed Autopilot, an agentic assistant with mandatory approval gates and shadow-mode testing before any action runs",
+            "Kept infrastructure cost near zero by design on Vercel; payments through Apple and Stripe",
+            "Deliver application and cloud security assessments for clients, with hands-on remediation support"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Applus+ Laboratories",
+      "context": "Global testing and certification group",
+      "location": "Barcelona, Spain",
+      "roles": [
+        {
+          "title": "Full-Stack Developer",
+          "note": "IT Infrastructure, hybrid",
+          "start": "2022-07",
+          "end": "2024-01",
+          "intro": "Led Client Area, the customer-facing portal where Applus+ clients follow their work end to end, from sample tracking to project status and reports.",
+          "bullets": [
+            "Designed the microservices architecture and built its 3 core services in FastAPI and .NET",
+            "Built the Next.js, React and TypeScript frontend on a tested component library (unit tests, Storybook)",
+            "Took the platform to public launch on the company's new Azure landing zone with the Cloud Center of Competence: Key Vault, virtual network isolation, Azure SQL, Container Registry, Blob Storage",
+            "Set up CI/CD pipelines in Azure DevOps and ran delivery in Scrum"
+          ]
+        },
+        {
+          "title": "Full-Stack Developer Intern",
+          "note": "E&E Laboratories",
+          "start": "2021-07",
+          "end": "2022-07",
+          "intro": "Sole developer of an internal platform used by 50+ laboratory staff to plan projects and coordinate resources.",
+          "bullets": [
+            "Built and owned the full stack: Laravel (PHP) REST APIs, Vue.js frontend and MySQL, Dockerized on an on-premise server",
+            "Stabilized the platform and worked directly with end users to prioritize and ship improvements"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Plink",
+      "context": "Contract via agency",
+      "location": "US, remote",
+      "roles": [
+        {
+          "title": "Mobile Application Developer",
+          "start": "2022-02",
+          "end": "2022-05",
+          "bullets": [
+            "Built app features in React Native with Redux state management",
+            "Built supporting Node.js server components and Dockerized development environments"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Odournet",
+      "location": "Barcelona, Spain",
+      "roles": [
+        {
+          "title": "Technical Analyst",
+          "start": "2017-06",
+          "end": "2020-02",
+          "intro": "Laboratory data analysis and sample classification, before moving into software engineering.",
+          "bullets": []
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "label": "Languages",
+      "items": ["TypeScript", "JavaScript", "Python", "Swift", "C#", "SQL"]
+    },
+    {
+      "label": "Frontend",
+      "items": ["React", "Next.js", "Redux", "Tailwind CSS", "Storybook"]
+    },
+    {
+      "label": "Mobile",
+      "items": ["SwiftUI", "React Native", "Expo", "Passkeys"]
+    },
+    {
+      "label": "Backend",
+      "items": [
+        "FastAPI",
+        "Django",
+        "Celery",
+        "Node.js",
+        ".NET",
+        "RabbitMQ",
+        "MySQL",
+        "Redis",
+        "REST APIs"
+      ]
+    },
+    {
+      "label": "Cloud & DevOps",
+      "items": [
+        "AWS (ECS, CloudFormation, CloudWatch)",
+        "Azure",
+        "Docker",
+        "GitLab CI",
+        "Azure DevOps",
+        "Vercel",
+        "Cloudflare"
+      ]
+    },
+    {
+      "label": "AI",
+      "items": ["LLM integration (Claude, OpenAI, Groq)", "Agentic workflows"]
+    },
+    {
+      "label": "Practices",
+      "items": [
+        "Microservices",
+        "Distributed systems",
+        "Data migration",
+        "Security reviews",
+        "CI/CD",
+        "Scrum"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Engineering, Telecommunications",
+      "school": "Universitat Politècnica de Catalunya (UPC)",
+      "location": "Barcelona, Spain",
+      "start": "2019-09",
+      "end": "2023-06"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Java Development & Computer Science",
+      "issuer": "Universidad Nebrija",
+      "year": 2022
+    },
+    {
+      "name": "Web Application Development (IFCD0210)",
+      "issuer": "ASEDEM",
+      "year": 2019
+    }
+  ],
+  "languages": [
+    { "name": "Spanish", "level": "Native" },
+    { "name": "Catalan", "level": "Native" },
+    { "name": "English", "level": "C1, full professional" }
+  ]
+}
