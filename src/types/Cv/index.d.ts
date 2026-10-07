@@ -13,6 +13,8 @@ export interface Cv {
     fileName: string;
     pageLimit: number;
     showPhoto: boolean;
+    /** `YYYY-MM`, shown on the CV so recruiters can see it is current */
+    updated: string;
   };
   basics: {
     name: string;

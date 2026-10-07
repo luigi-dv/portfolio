@@ -1,3 +1,5 @@
+import { getCaseStudy } from '@/content/case-studies';
+
 import { Project } from '@/types/Project';
 import projectData from '@/data/projects.json';
 import { getRepository } from '@/services/githubService';
@@ -10,6 +12,11 @@ export const getProjects = async () => {
   return Promise.all(
     projects.map(async (project) => ({
       ...project,
+      // Only link case studies that are published (or drafts in development)
+      caseStudyHref:
+        project.caseStudy && getCaseStudy(project.caseStudy)
+          ? `/work/${project.caseStudy}`
+          : null,
       repository: project.repo ? await getRepository(project.repo) : null,
     }))
   );

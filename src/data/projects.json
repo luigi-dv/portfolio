@@ -1,12 +1,13 @@
 {
   "projects": [
     {
-      "title": "Monolith to microservices migration",
+      "title": "Invoicing out of the monolith",
       "context": "Zoloo",
       "year": "2025–now",
-      "outcome": "Moved 40M+ historical records into new services with zero data loss, while the platform kept serving 20,000+ orders a day.",
-      "stack": ["Python", "FastAPI", "Celery", "RabbitMQ", "MySQL", "AWS"],
-      "private": true
+      "outcome": "Moved 40M+ invoices and credit notes into a new service with zero records lost, verified by counts, storage samples and side-by-side rendering, without a maintenance window.",
+      "stack": ["Python", "FastAPI", "Celery", "RabbitMQ", "MySQL"],
+      "private": true,
+      "caseStudy": "invoicing-migration"
     },
     {
       "title": "Zoloo for iOS",

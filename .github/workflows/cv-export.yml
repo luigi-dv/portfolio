@@ -1,0 +1,53 @@
+name: Export CV
+
+# Rebuilds public/cv/*.pdf whenever the CV content or its layout changes,
+# and commits the result so the site always serves an up-to-date PDF.
+on:
+  push:
+    branches: [master]
+    paths:
+      - src/data/cv.json
+      - src/app/cv/**
+      - src/app/globals.css
+      - src/app/layout.tsx
+      - scripts/export-cv.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cv-export
+  cancel-in-progress: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
+      NEXT_TELEMETRY_DISABLED: 1
+      CHROME_PATH: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # Builds the site and prints /cv to PDF; fails if over the page limit
+      - run: npm run cv:export
+
+      - name: Commit updated PDF
+        run: |
+          if git diff --quiet -- public/cv; then
+            echo "CV PDF unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/cv
+          git commit -m "chore(cv): export PDF"
+          git push

@@ -2,7 +2,8 @@
   "meta": {
     "fileName": "Luigelo-Davila-CV.pdf",
     "pageLimit": 2,
-    "showPhoto": true
+    "showPhoto": true,
+    "updated": "2026-10"
   },
   "basics": {
     "name": "Luigelo Davila",
@@ -23,7 +24,10 @@
         "label": "linkedin.com/in/luigelo-davila",
         "href": "https://www.linkedin.com/in/luigelo-davila/"
       },
-      { "label": "github.com/luigi-dv", "href": "https://github.com/luigi-dv" }
+      {
+        "label": "github.com/luigi-dv",
+        "href": "https://github.com/luigi-dv"
+      }
     ]
   },
   "summary": "Senior full-stack engineer with 5+ years taking products from architecture to production across web, native iOS, Python backends and AWS/Azure cloud. At **Zoloo**, a SaaS platform for bol.com sellers (€2.5B+ in member sales, 20,000+ orders a day), I own the native iOS app and lead the move from a monolith to microservices, including 40M+ records migrated with zero data loss in production. As founder of **Ldvloper**, I designed, built and launched **Syncflow**, an AI goal planner on web and iOS that reached 500+ users in its first month.",
@@ -216,8 +220,17 @@
     }
   ],
   "languages": [
-    { "name": "Spanish", "level": "Native" },
-    { "name": "Catalan", "level": "Native" },
-    { "name": "English", "level": "C1, full professional" }
+    {
+      "name": "Spanish",
+      "level": "Native"
+    },
+    {
+      "name": "Catalan",
+      "level": "Native"
+    },
+    {
+      "name": "English",
+      "level": "C1, full professional"
+    }
   ]
 }

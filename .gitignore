@@ -37,3 +37,6 @@ next-env.d.ts
 
 # env files (contain secrets)
 .env
+
+# Client-confidential drafts: never commit (see private/README.md)
+/private/

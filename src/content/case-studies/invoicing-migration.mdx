@@ -1,0 +1,66 @@
+At Zoloo, a SaaS platform for bol.com sellers, I lead the migration of core business domains out of a monolith into separate services. Invoicing went first: rendering, numbering, storing and delivering every invoice and credit note. This is the playbook I used, and what I'd keep or change next time.
+
+Invoices are an unforgiving domain to migrate. They are fiscal documents: a number can never be skipped or repeated, and customers and their accountants already hold every document the old system produced. "Mostly migrated" isn't an option.
+
+## Why invoicing first
+
+Invoicing has a single, well-bounded responsibility, which makes it a good first extraction. It also had to come before the orders migration: if orders moved first, the new orders service would have inherited invoice data it should never own.
+
+## The constraints
+
+- **No maintenance window.** Sellers issue invoices around the clock, so the migration had to happen under live traffic.
+- **Output parity.** The new service had to produce exactly what the old code produced, to the cent, rounding included. Customers already had those documents.
+- **Numbering integrity.** Handing number allocation from one system to another can't create a gap or a duplicate, even with a render in flight at the moment of the switch.
+- **A small team.** One backend engineer working with an AI pair, alongside a second migration that would share the same event contracts.
+
+## The playbook
+
+I used the strangler fig pattern, rolled out by customer cohort. The order domain publishes an immutable order snapshot, and the new service owns only fiscal documents.
+
+1. **Fix the baseline first.** Before moving anything, make numbering, scheduling and monitoring correct inside the monolith. Otherwise you migrate the bugs along with the data, and you can't tell old problems from new ones.
+2. **Transactional outbox.** Every invoice request is written as an event in the same database transaction as the change that caused it. A relay publishes it with broker confirms, so nothing counts as sent until the broker has acknowledged it.
+3. **Shadow mode.** The new service renders every invoice alongside the monolith, from the same snapshot, under a separate storage prefix. It allocates no numbers and sends nothing. A scheduled job compares number, order, totals and VAT per rate between the two, and the gate to go further is zero numeric mismatches over a large sample.
+4. **Backfill history in parallel**, with deterministic ids so any batch can be re-run safely.
+5. **Read path behind a flag.** Downloads and integrations ask the new service first and fall back to the legacy path on a miss. A circuit breaker makes sure a service deploy can never stall the monolith.
+6. **Write path by cohort.** A managed set of accounts plus a percentage decide who is migrated. For those accounts, every trigger becomes a request to the new service. Number allocation is handed over per account: the new counter is seeded from the old one before the first request, and a render in flight during the switch is adopted rather than duplicated. Rolling an account back is a single command that hands the counter back.
+7. **Projections flow back.** The service publishes document events, and the monolith keeps a slim reference and a few status flags, so screens that list orders keep working without owning invoice data.
+
+<MigrationDiagram />
+
+## Moving 40M+ records
+
+- **Range reads only.** Historical rows were read in primary-key order, in fixed-size batches, through a read-only database user, with a configurable pause between batches. The live database only ever saw cheap, predictable queries.
+- **Safe to re-run by design.** Each migrated document gets a deterministic id derived from its legacy key, kept outside the id space of new documents. Re-running a batch inserts only what's missing.
+- **Checkpoints.** A watermark per source table records the last key copied and is committed with each batch, so a stopped backfill resumes exactly where it was, without re-copying anything.
+- **Daily deltas inside the service.** Rows created after the main copy are picked up by a daily pass scheduled within the service itself, where a failure shows up on its dashboard, rather than by a host cron job that can fail silently.
+
+## Proving nothing was lost
+
+"Zero data loss" is a claim, so verification ran in layers:
+
+- **Counts per period**, old against new, for each document type, with any rows that legitimately can't be mapped accounted for explicitly.
+- **Storage samples.** A random sample of migrated documents is fetched using the new service's own credentials. A row count proves the record exists; only a fetch proves the file is reachable by the path that will serve it.
+- **Side-by-side rendering.** The shadow comparison ran for weeks before any account switched, and the final rounds compared tens of thousands of documents with zero differences.
+- **Live reconciliation.** A completeness monitor (orders that should have an invoice and don't) kept running through the cutover, alongside the service's own backlog, stuck-request and dead-letter metrics.
+
+The layers paid off. Verification caught a bug in the verifier itself, a storage access issue on older files before any customer ran into it, and rounding differences between the old and new code, all before they could reach a customer.
+
+## A lesson in query shapes
+
+The backfill slowed down with every batch on its first night. Each batch checked for duplicate invoice numbers with a query shaped like `account_id IN (...) AND number IN (...)`, and MySQL executed it as a scan of every row of every account in the batch. The cost grew with the table, so the whole run was quadratic.
+
+I noticed by reading the watermark twice, an hour apart, then measured six query shapes with `EXPLAIN` on a scratch database seeded with synthetic data. The tuple form, `(account_id, number) IN (...)`, which most people reach for next, also full-scanned. What worked was a composite index on account and number plus one `OR` group per account, which brought each batch down to milliseconds.
+
+The lesson: on a large table, a query's shape matters as much as its indexes. Measure the plan on realistic data before trusting it.
+
+## Results
+
+- **40M+ historical invoices and credit notes** migrated into the new service with **zero records lost**, verified by counts, storage samples and side-by-side rendering.
+- No maintenance window: the whole migration ran under live traffic.
+- The new service now issues invoices for pilot accounts covering every invoice path, numbered seamlessly from where the monolith stopped, and is ramping up to all accounts.
+- Invoicing deploys on its own in minutes, with its own dashboard, instead of riding along with every monolith release.
+
+## What I'd do differently
+
+- **Match legacy output exactly from day one.** I started with "correct" decimal arithmetic and spent two rounds discovering that the old system's rounding was the contract customers already had. Parity first; corrections later, as separate and deliberate changes.
+- **Write the verifier before the backfill, and test it on realistic data.** Early versions were wrong in ways that could have hidden a real gap, and a later one was too expensive to run against a live database. A verifier is production code.

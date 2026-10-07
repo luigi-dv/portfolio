@@ -4,9 +4,9 @@ import type { Metadata } from 'next';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { formatPeriod } from '@/utilities/date';
 import { renderInline } from '@/utilities/markdown';
 import { ArrowLeftIcon, DownloadIcon } from 'lucide-react';
+import { formatMonth, formatPeriod } from '@/utilities/date';
 
 import { cn } from '@/lib/utils';
 import { getCvData } from '@/services/cvService';
@@ -209,6 +209,9 @@ export default async function CvPage() {
                 .join(', ')}
             </p>
           </CvSection>
+          <p className='mt-6 text-[8pt] text-muted-foreground'>
+            Updated {formatMonth(cv.meta.updated)}
+          </p>
         </div>
       </article>
     </div>
