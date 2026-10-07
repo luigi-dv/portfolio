@@ -18,6 +18,13 @@ export interface Principle {
   linkLabel?: string;
 }
 
+interface ContactPath {
+  title: string;
+  text: string;
+  /** Email subject, so enquiries are easy to tell apart */
+  subject: string;
+}
+
 export interface Profile {
   name: string;
   initials: string;
@@ -28,6 +35,12 @@ export interface Profile {
   summary: string[];
   /** "How I work" section */
   principles: Principle[];
+  /** Contact section, split by audience */
+  contact: {
+    intro: string;
+    hiring: ContactPath;
+    project: ContactPath;
+  };
   email: string;
   url: string;
   avatarUrl: string;

@@ -333,20 +333,74 @@ const Home = async () => {
           ))}
         </ul>
       </Section>
-      <Section id='contact' title='Get in touch'>
-        <p className='text-sm sm:text-base text-pretty max-w-prose'>
-          I&apos;m based in Warsaw and work remotely with teams across Europe.
-          Email is the fastest way to reach me.
-        </p>
-        <TrackedLink
-          event='Email click'
-          eventData={{ location: 'contact' }}
-          href={`mailto:${profile.email}`}
-          className={cn(buttonVariants({ size: 'lg' }), 'mt-5 w-fit gap-2')}
-        >
-          <Icons.email className='size-4' aria-hidden='true' />
-          {profile.email}
-        </TrackedLink>
+      <Section
+        id='contact'
+        title='Get in touch'
+        description={profile.contact.intro}
+      >
+        <div className='grid gap-4 sm:grid-cols-2'>
+          <div className='flex flex-col rounded-xl border p-5'>
+            <h3 className='font-medium'>{profile.contact.hiring.title}</h3>
+            <p className='mt-1.5 flex-1 text-sm text-muted-foreground text-pretty'>
+              {profile.contact.hiring.text}
+            </p>
+            <div className='mt-4 flex flex-wrap gap-2'>
+              <TrackedLink
+                event='Email click'
+                eventData={{ location: 'contact-hiring' }}
+                href={`mailto:${profile.email}?subject=${encodeURIComponent(profile.contact.hiring.subject)}`}
+                className={cn(buttonVariants({ size: 'sm' }), 'gap-1.5')}
+              >
+                <Icons.email className='size-3.5' aria-hidden='true' />
+                Email me
+              </TrackedLink>
+              <TrackedLink
+                event='CV download'
+                eventData={{ location: 'contact' }}
+                href={profile.cvUrl}
+                download
+                className={cn(
+                  buttonVariants({ size: 'sm', variant: 'outline' }),
+                  'gap-1.5'
+                )}
+              >
+                <DownloadIcon className='size-3.5' aria-hidden='true' />
+                Download CV
+              </TrackedLink>
+            </div>
+          </div>
+          <div className='flex flex-col rounded-xl border p-5'>
+            <h3 className='font-medium'>{profile.contact.project.title}</h3>
+            <p className='mt-1.5 flex-1 text-sm text-muted-foreground text-pretty'>
+              {profile.contact.project.text}
+            </p>
+            <div className='mt-4 flex flex-wrap gap-2'>
+              <TrackedLink
+                event='Project enquiry click'
+                eventData={{ location: 'contact' }}
+                href={`mailto:${profile.email}?subject=${encodeURIComponent(profile.contact.project.subject)}`}
+                className={cn(buttonVariants({ size: 'sm' }), 'gap-1.5')}
+              >
+                <Icons.email className='size-3.5' aria-hidden='true' />
+                Email me
+              </TrackedLink>
+              <TrackedLink
+                event='Ldvloper click'
+                eventData={{ location: 'contact' }}
+                href={ventures.company.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={cn(
+                  buttonVariants({ size: 'sm', variant: 'outline' }),
+                  'gap-1.5'
+                )}
+              >
+                Visit Ldvloper
+                <ArrowUpRightIcon className='size-3.5' aria-hidden='true' />
+              </TrackedLink>
+            </div>
+          </div>
+        </div>
       </Section>
     </>
   );

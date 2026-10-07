@@ -106,5 +106,18 @@
       "name": "English",
       "level": "C1, full professional"
     }
-  ]
+  ],
+  "contact": {
+    "intro": "I'm based in Warsaw and work remotely with teams across Europe.",
+    "hiring": {
+      "title": "Hiring for a senior role?",
+      "text": "I'm open to senior full-stack and mobile roles, remote in the EU or on a B2B contract. Email is the fastest way to reach me.",
+      "subject": "Senior role"
+    },
+    "project": {
+      "title": "Have a project?",
+      "text": "Through Ldvloper, my software studio, I build web and native apps, migrate and scale platforms in the cloud, and run technical and security audits.",
+      "subject": "Project enquiry"
+    }
+  }
 }
