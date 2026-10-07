@@ -11,6 +11,8 @@ export interface Language {
 export interface Principle {
   title: string;
   text: string;
+  /** Optional ordered steps shown under the text */
+  steps?: string[];
   /** Slug of a case study that shows this principle in practice */
   caseStudy?: string;
   linkLabel?: string;

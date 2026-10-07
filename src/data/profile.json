@@ -10,20 +10,44 @@
   ],
   "principles": [
     {
-      "title": "Analyse with AI, confirm with people, ship in small steps",
-      "text": "I first analyse with the help of AI to go faster. Then I confirm with the team, especially with the people who know the product better than any model. Then I execute progressively, always thinking about the final user.",
+      "title": "Start from the person using it",
+      "text": "I put myself in the user's position and take decisions from there. With feedback, I look for the common issue, try to see it objectively, and go back with questions to find the why: was it hard to use, did it work differently than expected, or did it simply not work? I also study success stories, and what customers complain about on other platforms, so I don't repeat the same mistakes."
+    },
+    {
+      "title": "Keep it simple so it lasts",
+      "text": "Messy doesn't mean bad code. It means code that will be hard to maintain. Complexity isn't quality: simple, functional and well-structured systems work in harmony with each other, and good planning protects you from painful migrations and computing costs nobody can predict. Before changing anything, I ask the people who know that code best. I apply the same idea in my life: keep things simple and organized, so anyone can understand them and give me a hand."
+    },
+    {
+      "title": "Move in small, verified steps",
+      "text": "Big changes go out progressively. At Zoloo we migrated the accounts with the fewest orders first, ran everything in shadow mode, and only moved on when the data matched. The waiting and checking isn't lost time: that's when the small things get fixed.",
       "caseStudy": "invoicing-migration",
-      "linkLabel": "See it in the Zoloo invoicing migration"
+      "linkLabel": "Read the Zoloo invoicing migration"
     },
     {
-      "title": "Own the product, not just the code",
-      "text": "I like owning what I build and making decisions based on data and user feedback. With AI that matters even more: I define the architecture, the requirements and the constraints, and agents implement inside feedback loops that review every change. Without someone owning the product, AI leads to security issues and a messy codebase.",
+      "title": "When something breaks, protect users first",
+      "text": "I prioritize mitigation over the root cause. Then I follow the same steps every time:",
+      "steps": [
+        "Triage: check who's affected, and roll back, stabilize or fix it if it's simple.",
+        "Investigate: look for causes, patterns and recent changes in observability, error tracking and git history.",
+        "Communicate early with customer support and the affected users.",
+        "Verify everything works again, and measure the impact: users affected, data to recover, and how long that takes.",
+        "Tell affected users if data was lost or has to be recovered.",
+        "Prevent it: write the post-mortem and make the code resilient to the same failure."
+      ]
+    },
+    {
+      "title": "Use AI as a tool, own every decision",
+      "text": "A year ago I wasn't working with AI at all; now it's part of my daily work. I analyse with AI, confirm with the team and execute progressively. Anything touching business logic or production data, I do myself, and AI confirms and refines.",
       "caseStudy": "syncflow-autopilot",
-      "linkLabel": "See it in Syncflow Autopilot"
+      "linkLabel": "Read how I built Syncflow Autopilot"
     },
     {
-      "title": "Keep it simple, fast and cheap to run",
-      "text": "When there's messy code or something nobody fully understands, I dig in, ask, clean it up and improve it. Simple systems cost less to run, and stay fast enough that users never notice them."
+      "title": "Only ship what I'd use myself",
+      "text": "One of my teachers at school only accepted clean essays, with no correction fluid or crossed-out words, and that stayed with me. I'm objective and self-critical, and sometimes that makes me over-polish. But I know when the requirements are met and it's time to get feedback from different users, because each one brings different scenarios."
+    },
+    {
+      "title": "Explain it so anyone understands",
+      "text": "I learned to explain technical things to non-technical people. I prepare, and I look into the background of the person I'll work with, so I don't over-explain or go through things that don't matter to them. Even close friends know what I do for a living, and why I once left a dinner early: I had suddenly seen how a solution could fit into a system, like a puzzle piece."
     }
   ],
   "email": "luigelo@ldvloper.com",

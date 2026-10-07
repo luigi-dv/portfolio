@@ -1,9 +1,14 @@
 import React, { Suspense } from 'react';
 
-import { formatPeriod } from '@/utilities/date';
 import { renderInline } from '@/utilities/markdown';
-import { getCaseStudy } from '@/content/case-studies';
-import { ArrowRightIcon, DownloadIcon, MapPinIcon } from 'lucide-react';
+import { formatMonth, formatPeriod } from '@/utilities/date';
+import { caseStudies, getCaseStudy, isPublished } from '@/content/case-studies';
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  DownloadIcon,
+  MapPinIcon,
+} from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
@@ -16,10 +21,12 @@ import { TrackedLink } from '@/components/TrackedLink';
 import { buttonVariants } from '@/components/ui/button';
 import { getProjects } from '@/services/projectService';
 import { PersonJsonLd } from '@/components/PersonJsonLd';
+import { CaseStudyCard } from '@/components/CaseStudyCard';
 import { getContactData } from '@/services/contactService';
 import { getProfileData } from '@/services/profileService';
 import { getVentureData } from '@/services/ventureService';
 import { getEducationData } from '@/services/educationService';
+import { getTestimonialData } from '@/services/testimonialService';
 import { ExperienceTimeline } from '@/components/ExperienceTimeline';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CodeActivity, CodeActivitySkeleton } from '@/components/CodeActivity';
@@ -28,15 +35,25 @@ import { CodeActivity, CodeActivitySkeleton } from '@/components/CodeActivity';
 export const revalidate = 3600;
 
 const Home = async () => {
-  const [profile, work, projects, ventures, educationData, contactData] =
-    await Promise.all([
-      getProfileData(),
-      getWorkData(),
-      getProjects(),
-      getVentureData(),
-      getEducationData(),
-      getContactData(),
-    ]);
+  const [
+    profile,
+    work,
+    projects,
+    ventures,
+    educationData,
+    contactData,
+    testimonialData,
+  ] = await Promise.all([
+    getProfileData(),
+    getWorkData(),
+    getProjects(),
+    getVentureData(),
+    getEducationData(),
+    getContactData(),
+    getTestimonialData(),
+  ]);
+
+  const publishedStudies = caseStudies.filter(isPublished);
 
   const sameAs = Object.values(contactData?.contact.social ?? {})
     .map((social) => social.url)
@@ -133,6 +150,21 @@ const Home = async () => {
         </div>
       </header>
 
+      <Section
+        id='work'
+        title='Selected work'
+        description="Two deep dives first, then more of what I've built. Most of it lives in private codebases, so I describe the result rather than link to the code."
+      >
+        <div className='space-y-4'>
+          {publishedStudies.map((study) => (
+            <CaseStudyCard key={study.slug} study={study} />
+          ))}
+        </div>
+        <h3 className='mt-10 mb-1 text-sm font-semibold'>More work</h3>
+        <ProjectList
+          projects={projects.filter((project) => !project.caseStudyHref)}
+        />
+      </Section>
       <Section id='how-i-work' title='How I work'>
         <ul className='space-y-6'>
           {profile.principles.map((principle) => (
@@ -142,6 +174,16 @@ const Home = async () => {
               <p className='text-sm text-muted-foreground text-pretty max-w-prose'>
                 {principle.text}
               </p>
+
+              {principle.steps && (
+                <ol className='list-decimal space-y-1 pl-5 text-sm text-muted-foreground marker:text-muted-foreground/70 max-w-prose'>
+                  {principle.steps.map((step) => (
+                    <li key={step} className='text-pretty'>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              )}
 
               {principle.caseStudy && getCaseStudy(principle.caseStudy) && (
                 <TrackedLink
@@ -159,15 +201,50 @@ const Home = async () => {
           ))}
         </ul>
       </Section>
-
-      <Section
-        id='work'
-        title='Selected work'
-        description='Most of this lives in private company codebases, so each entry describes the result rather than linking to the code.'
-      >
-        <ProjectList projects={projects} />
+      <Section id='testimonials' title='What colleagues say'>
+        <div className='space-y-8'>
+          {testimonialData.testimonials.map((testimonial) => (
+            <figure
+              key={testimonial.name}
+              className='border-l-2 border-primary/70 pl-5'
+            >
+              <blockquote className='text-pretty max-w-prose'>
+                <p>&ldquo;{testimonial.quote}&rdquo;</p>
+              </blockquote>
+              <figcaption className='mt-3 text-sm'>
+                <span className='font-medium'>{testimonial.name}</span>
+                <span className='text-muted-foreground'>
+                  , {testimonial.role}
+                </span>
+                <span className='block text-xs text-muted-foreground'>
+                  {testimonial.relationship}. LinkedIn recommendation,{' '}
+                  {formatMonth(testimonial.date)}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <a
+          href={testimonialData.sourceUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='mt-6 inline-flex w-fit items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline'
+        >
+          Read the full recommendations on LinkedIn
+          <ArrowUpRightIcon className='size-3.5' aria-hidden='true' />
+        </a>
       </Section>
 
+      <Section id='experience' title='Experience'>
+        <ExperienceTimeline work={work} />
+      </Section>
+      <Section
+        id='ventures'
+        title='Entrepreneurship'
+        description='Alongside client work, I run my own studio and build products end to end, from design to launch.'
+      >
+        <Ventures ventures={ventures} />
+      </Section>
       <Section
         id='activity'
         title='Code activity'
@@ -177,19 +254,6 @@ const Home = async () => {
           <CodeActivity profileUrl={profile.githubUrl} />
         </Suspense>
       </Section>
-
-      <Section id='experience' title='Experience'>
-        <ExperienceTimeline work={work} />
-      </Section>
-
-      <Section
-        id='ventures'
-        title='Entrepreneurship'
-        description='Alongside client work, I run my own studio and build products end to end, from design to launch.'
-      >
-        <Ventures ventures={ventures} />
-      </Section>
-
       <Section id='skills' title='Skills'>
         <dl className='grid gap-4 sm:grid-cols-[8rem_1fr] sm:gap-x-6 text-sm'>
           {profile.skills.map((group) => (
@@ -216,7 +280,6 @@ const Home = async () => {
           </dd>
         </dl>
       </Section>
-
       <Section id='education' title='Education'>
         <ul className='space-y-4'>
           {educationData.education.map((education) => (
@@ -270,7 +333,6 @@ const Home = async () => {
           ))}
         </ul>
       </Section>
-
       <Section id='contact' title='Get in touch'>
         <p className='text-sm sm:text-base text-pretty max-w-prose'>
           I&apos;m based in Warsaw and work remotely with teams across Europe.

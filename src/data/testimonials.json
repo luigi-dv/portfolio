@@ -1,0 +1,26 @@
+{
+  "sourceUrl": "https://www.linkedin.com/in/luigelo-davila/details/recommendations/",
+  "testimonials": [
+    {
+      "quote": "Luigelo is a great Full Stack developer, someone you could delegate even the most difficult tasks and he will come back at you with a solution.",
+      "name": "Federico Lacabaratz",
+      "role": "Senior Frontend React Developer",
+      "relationship": "Worked on the same team",
+      "date": "2023-06"
+    },
+    {
+      "quote": "He knows front-end, back-end and DevOps (among other things), and he knows it well. … He also knows how to lead development teams to get tasks done, as well as how to accompany and make the people around him better.",
+      "name": "Mario Barceló",
+      "role": "Frontend Developer",
+      "relationship": "Worked alongside Luigelo, who was senior to him",
+      "date": "2023-09"
+    },
+    {
+      "quote": "Luigi is a 100% proactive person, professional, responsible, self-taught and with a distinguished vocation for software development and cybersecurity. … he is a great generator of knowledge for all his peers.",
+      "name": "Emanuel Ballón",
+      "role": "IT Project Manager",
+      "relationship": "His project manager at Applus+",
+      "date": "2023-01"
+    }
+  ]
+}

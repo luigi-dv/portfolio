@@ -48,7 +48,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'syncflow-autopilot',
     stack: ['Next.js', 'TypeScript', 'MCP', 'LLM APIs'],
     summary:
-      'How I designed Syncflow Autopilot, a beta AI agent that never finishes a step without asking, and built it with parallel AI coding agents. It started with changing my car brakes.',
+      'How I designed Syncflow Autopilot, a beta AI agent that never finishes a step without asking, and built it with parallel AI coding agents.',
     title: 'Building an AI agent that always asks first',
   },
 ];
