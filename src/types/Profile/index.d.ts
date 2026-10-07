@@ -8,6 +8,14 @@ export interface Language {
   level: string;
 }
 
+export interface Principle {
+  title: string;
+  text: string;
+  /** Slug of a case study that shows this principle in practice */
+  caseStudy?: string;
+  linkLabel?: string;
+}
+
 export interface Profile {
   name: string;
   initials: string;
@@ -16,6 +24,8 @@ export interface Profile {
   availability?: string;
   /** Paragraphs; supports `**bold**` */
   summary: string[];
+  /** "How I work" section */
+  principles: Principle[];
   email: string;
   url: string;
   avatarUrl: string;

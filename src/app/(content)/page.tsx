@@ -2,7 +2,8 @@ import React, { Suspense } from 'react';
 
 import { formatPeriod } from '@/utilities/date';
 import { renderInline } from '@/utilities/markdown';
-import { DownloadIcon, MapPinIcon } from 'lucide-react';
+import { getCaseStudy } from '@/content/case-studies';
+import { ArrowRightIcon, DownloadIcon, MapPinIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
@@ -131,6 +132,33 @@ const Home = async () => {
           ))}
         </div>
       </header>
+
+      <Section id='how-i-work' title='How I work'>
+        <ul className='space-y-6'>
+          {profile.principles.map((principle) => (
+            <li key={principle.title} className='space-y-1.5'>
+              <h3 className='font-medium leading-snug'>{principle.title}</h3>
+
+              <p className='text-sm text-muted-foreground text-pretty max-w-prose'>
+                {principle.text}
+              </p>
+
+              {principle.caseStudy && getCaseStudy(principle.caseStudy) && (
+                <TrackedLink
+                  href={`/work/${principle.caseStudy}`}
+                  event='Case study open'
+                  eventData={{ location: 'how-i-work' }}
+                  className='inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline'
+                >
+                  {principle.linkLabel ?? 'Read the case study'}
+
+                  <ArrowRightIcon className='size-3.5' aria-hidden='true' />
+                </TrackedLink>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       <Section
         id='work'

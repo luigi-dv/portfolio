@@ -1,12 +1,30 @@
 {
   "name": "Luigelo Davila",
   "initials": "LD",
-  "headline": "Full-stack engineer shipping web, mobile and cloud products from architecture to production.",
+  "headline": "I design how data and automation reach your apps: fast, efficient and built around the people using them.",
   "availability": "Open to senior full-stack and mobile roles, remote in the EU or B2B.",
   "summary": [
     "I've spent 5 years taking software from architecture to production across web, mobile, backend and cloud.",
     "At **Zoloo** (formerly Boloo), a SaaS platform for bol.com sellers with €2.5B+ in member sales and 20,000+ orders a day, I own the native iOS app and lead the migration of core business domains from a monolith to microservices, including moving 40M+ historical records while the system stayed in production.",
     "Before that I led a customer-facing microservices portal at **Applus+**, and I built and launched **Syncflow**, an AI goal planner, as a solo founder."
+  ],
+  "principles": [
+    {
+      "title": "Analyse with AI, confirm with people, ship in small steps",
+      "text": "I first analyse with the help of AI to go faster. Then I confirm with the team, especially with the people who know the product better than any model. Then I execute progressively, always thinking about the final user.",
+      "caseStudy": "invoicing-migration",
+      "linkLabel": "See it in the Zoloo invoicing migration"
+    },
+    {
+      "title": "Own the product, not just the code",
+      "text": "I like owning what I build and making decisions based on data and user feedback. With AI that matters even more: I define the architecture, the requirements and the constraints, and agents implement inside feedback loops that review every change. Without someone owning the product, AI leads to security issues and a messy codebase.",
+      "caseStudy": "syncflow-autopilot",
+      "linkLabel": "See it in Syncflow Autopilot"
+    },
+    {
+      "title": "Keep it simple, fast and cheap to run",
+      "text": "When there's messy code or something nobody fully understands, I dig in, ask, clean it up and improve it. Simple systems cost less to run, and stay fast enough that users never notice them."
+    }
   ],
   "email": "luigelo@ldvloper.com",
   "url": "https://luigelo.ldvloper.com",
