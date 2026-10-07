@@ -1,66 +1,76 @@
-Syncflow takes a goal, uses AI to break it into small steps it calls crumbs, and hands them to you one at a time in Focus Flow. Autopilot is the feature that lets your tools do some of those steps for you.
+Syncflow takes a goal, uses AI to break it into small steps we call crumbs, and gives them to you one at a time. Autopilot is the beta feature that lets AI and agents do some of those steps for you.
 
-This is how I designed an AI agent that acts on someone's personal plan without ever finishing anything behind their back, how I built it with parallel AI coding agents, and why I then moved it out of the main product.
+## Where the idea came from
 
-## The design problem
+This is actually funny. I've always been very driven to do things carefully, even more when someone else is going to see or use them. I think one of my teachers at school had that impact on me, always asking for clean essays and refusing the ones with too much correction fluid or crossed-out words.
 
-An agent working through someone's plan can go wrong in three ways. It can do things it never should, like a step that involves money, health or another person. It can spend the user's money, because Syncflow runs on the user's own AI provider key. And it can do all of that quietly, while nobody is watching.
+When we do a big task, there are things we skip or don't do at all, because they look obvious to us or we simply overlook them. The real problem is: what if the thing you think is insignificant is actually important?
 
-So three rules shaped everything else:
+A good example is changing your car's brakes. It sounds complex, but many people do it themselves, and honestly a lot of us never even learned how to change the oil. When I did it, I spent a lot of time on the internet finding the correct part names and matching everything with the VIN (your car parts have to match it exactly). And then there were other things to check in the background: the torque specs for the different bolts, how to unlock the electronic parking brake…
 
-- **Autonomy is a ladder with a ceiling**, and the user decides how high each rule may climb.
-- **Rules can only tighten limits**, never loosen them.
+After all that time, I asked myself: what if my app had an agent-driven autopilot for these tasks and the crumbs they create? I could configure what I want to research more deeply for my specific case, or let AI and agents find the best tool prices if I say I don't have them. Or even crazier: when I moved to Poland, what if they could help me translate documents or prepare scripts in Polish, to make life easier for me and for the people at the border and the district office?
+
+All of that, to make AI actually useful in daily life, without depending on prompting an LLM and copy-pasting answers.
+
+## Why it always asks first
+
+If the AI could do everything on its own, it would be the end of the world as we know it. AI can have a lot of knowledge, but the context and the constraints we give it are the main safeguard against really bad outcomes: security breaches, leaking personal information, or breaking business conditions that we as humans agreed on for reasons that depend on human relationships and agreements.
+
+So Autopilot was designed around three rules:
+
+- **Autonomy is a ladder with a ceiling**, and the user decides how high each rule can go.
+- **Rules can only make limits stricter**, never looser.
 - **Trust is earned in stages**: simulate, then preview, then shadow, then act.
 
 ## The Action Ladder
 
-Every action Autopilot can take sits on one rung:
+With ChatGPT, you prompt, you read the answer, and then you do the work yourself. Syncflow already has a nice UI to mark a step as done, and it updates the next steps if you comment. That part is solved.
+
+But imagine you're the owner of a tire repair shop, or someone in marketing with no coding knowledge, and you're planning several tasks. You'd want everything marked as digital or coding work to just get done for you. That's where the ladder comes in. Every action Autopilot can take sits on one level:
 
 1. **Research it.** Reads around the step and writes tips, resources and common traps. Nothing changes; you review the notes.
 2. **Plan it.** Breaks the step into smaller steps you can edit or delete.
 3. **Draft it.** Produces the actual thing as a draft (the email, the outline, the checklist) and attaches it. You finish it and mark it done.
 4. **Work with me.** Proposes the next small move as a thread on the step and waits for you each time. This one needs a paid plan.
-5. **Complete, then ask me.** Does the whole step, then stops. The step waits for you to approve, reject or edit it.
-6. **Complete and decide.** On the ladder, but switched off for every plan and every setting.
+5. **Complete, then ask me.** Does the whole step and stops. The step waits for you to approve, reject or edit it.
+6. **Complete and decide.** It's on the ladder, but switched off for every plan and every setting.
 
-The default ceiling is level 5. Nothing in Syncflow is marked done by Autopilot without a person approving it.
+The default ceiling is level 5. Nothing is marked as done by Autopilot without a person approving it.
 
-## Rules
-
-A rule has four parts: **signals** (facts about a crumb, such as its duration, its type of work, or whether it needs a human), **logic** that combines them (all of, any of, none of), an **action** on the ladder, and a **scope** for where and when it applies. Each crumb is classified before any rule looks at it, and five templates, such as "Draft what a computer can do", mean nobody has to start from a blank canvas.
+Every step is classified first (how long it takes, what kind of work it is, whether it needs a human), and rules use that classification to decide what to do. The classification still needs to get more accurate, and that's one of the reasons Autopilot is in beta. But it's already functional.
 
 ## Guardrails
 
-Seven guardrails apply to every rule, whatever it says:
+Seven guardrails apply to every rule, no matter what the rule says:
 
 - **An autonomy ceiling**, capped by the account's plan. A rule can lower it, never raise it.
-- **A daily action budget** of 20 actions. Refused actions aren't queued for later, every step gets one action before any step gets a second, and a separate daily token cap protects the user's provider bill.
-- **Off-limits work.** Physical, financial, health and personal steps are never auto-completed, and long steps above the user's threshold are skipped.
-- **Hands off work in progress.** A step you've started is off-limits, and queued work is cancelled the moment you start, finish or skip it.
-- **Quiet hours.** Work waits until your active hours, so nothing runs unwatched overnight.
-- **A limit on the approval queue.** When too many results are waiting for you, Autopilot pauses and nudges instead of piling up more.
-- **Auto-parking.** Three failures in a row and a rule stops trying until the underlying problem is fixed.
+- **A daily budget** of 20 actions, where every step gets one action before any step gets a second one, plus a separate daily token limit to protect the user's AI provider bill.
+- **Off-limits work.** Physical, financial, health and personal steps are never completed automatically.
+- **Hands off work in progress.** If you started a step, Autopilot doesn't touch it, and queued work is cancelled the moment you start, finish or skip it.
+- **Quiet hours.** Work waits until your active hours, so nothing runs overnight without anyone watching.
+- **A limit on approvals.** When too many results are waiting for you, Autopilot pauses and reminds you instead of piling up more.
+- **Auto-parking.** Three failures in a row and a rule stops trying until the problem is fixed.
 
-On top of those, two kill switches: users can pause everything from the app, and I can stop Autopilot system-wide without a deploy.
+And two kill switches: users can pause everything from the app, and I can stop Autopilot for everyone without a deploy.
+
+The direction I'm most excited about is making these decisions depend on the user's expertise. If we build good memory and accurate relations between each user's data (trends, time to complete, skipped tasks, their profile, their prompts), we can understand each user really well. Then Autopilot can save people many hours on exactly the things they're not experts in, by researching or completing those tasks for them.
 
 ## Earning trust before acting
 
 A new rule never goes straight to real work:
 
-1. **Test run.** Simulates two weeks against your real tasks or a sample project, using the same rule engine and guardrails as the real thing. It never calls your AI provider and never changes a task. Every row is one decision: which task, which rule, which action, where it would run, and an estimated token cost.
-2. **Try it on one crumb.** One real action with your key, shown as a preview, applied to nothing.
-3. **Shadow mode.** Three real days in which Autopilot records what it would have done into Activity, as things actually happen.
+1. **Test run.** Simulates two weeks against your real tasks or a sample project, with the same rules and guardrails as the real thing. It never calls your AI provider and never changes a task.
+2. **Try it on one crumb.** One real action with your key, shown as a preview and applied to nothing.
+3. **Shadow mode.** Three real days where Autopilot only writes down what it would have done.
 4. **Live**, inside every guardrail above.
 
-Or as the docs put it: "Use Test Run while you are drawing. Use shadow before you trust it."
+When a result is ready, approving it works exactly like finishing a step by hand: the step moves on screen right away, the phone vibrates, the last step of a plan gets confetti, and if the server call fails, everything rolls back with a message.
 
-## Approving feels like finishing a step
+## Syncflow as the orchestra conductor
 
-Approving an Autopilot result goes through exactly the same path as finishing a step by hand: the step moves on screen immediately, the phone gives a short vibration, the last step of a plan gets confetti, and if the server call fails, everything rolls back with a message. Autopilot doesn't get its own second-class "approve" screen. Approving is how you finish.
+If you already have your own agent environment, like Claude Code, why not use it? Syncflow doesn't compete on the quality of the models or on prompting. Syncflow orchestrates. It's like an orchestra conductor: it knows how music works, but it's not focused on one instrument. The instruments are the user's own agents, connected through MCP.
 
-## Work on your own machine
-
-Some work is better done locally, coding work especially. Autopilot can hand assignments to your own machine through Syncflow's MCP server, the protocol tools like Claude Code use to call external services:
+Setting it up is one command:
 
 ```sh
 claude mcp add syncflow \
@@ -69,38 +79,31 @@ claude mcp add syncflow \
   -- npx -y @syncflowme/mcp-server
 ```
 
-It's a pull model. The local agent announces it's alive (`executor_heartbeat`), looks for work (`list_assignments`), claims it (`claim_assignment`), does it, and hands the result back (`submit_assignment_result`), or gives it up (`release_assignment`). Nothing is ever pushed into your machine, and `SYNCFLOW_EXECUTOR=1` is an explicit opt-in: without it you still get the Syncflow tools, but nothing picks up work. Connected machines show up in an Executors tab, kept current by their heartbeats.
-
-A nice side effect: "Claude Code is online" becomes a signal a rule can use. Coding work goes to your laptop while you're at your desk, and something else happens when you're not.
+It's a pull model. Your agent says it's alive, claims work, does it and sends the result back. Nothing is ever pushed into your machine, and `SYNCFLOW_EXECUTOR=1` is an explicit opt-in: without it you still get the Syncflow tools, but nothing picks up work. And "Claude Code is online" becomes something a rule can use: coding work goes to your laptop while you're at your desk, and something else happens when you're not.
 
 <AutopilotDiagram />
 
-## Built with parallel AI agents
+## Building it with parallel agents
 
-Syncflow spans four repositories: the Next.js app, the API, background jobs, and shared packages that hold the automation domain. I built Autopilot in seven batches, each split across parallel AI coding agents working in their own git worktrees. Batches one to six shipped on 7 September 2026.
+It was amazing. I defined the architecture, the functional requirements and the UI constraints, and I focused on the feature, the data and the infrastructure. The agents took care of component encapsulation, clean code, single-responsibility components, and writing tests from the natural-language specs I gave them. I built it in seven batches, each one split across agents working in their own git worktrees.
 
-Two lessons came straight from that way of working:
+Honestly, this is where I got proficient in what's called Harness Engineering: creating feedback loops in my local agent environment, so every change, from another agent or from me, gets checked and reviewed in cycles, and they give me feedback and their plan. Around 30% of the time the plan was exactly what I was aiming for. The rest of the time it needed a small tweak, or I had to redefine things the AI had assumed.
 
-- **"Done" isn't the same as merged.** One agent reported a 1,368-line branch as integrated. It never was merged, and only the check I run before cleaning up worktrees caught it.
-- **Parallel agents have a real cost.** Four agents used up a session's usage cap in about an hour. Since then, agents commit after every verified unit of work, so hitting a limit costs as little as possible.
+Two lessons from that way of working:
+
+- **"Done" isn't the same as merged.** One agent reported a 1,368-line branch as integrated, but it was never merged. Only the check I run before cleaning up worktrees caught it.
+- **Parallel agents have a real cost.** Four agents used up a session's usage limit in about an hour, so now agents commit after every verified piece of work.
 
 ## What went wrong
 
-**It worked everywhere except where users are.** The app only forwards an API call to the backend when that path prefix is in a routing map that is baked in at build time. Automations were never added to it. For about two weeks, the whole feature couldn't be reached from a browser, while every server-side check passed. The lesson: test the full path from the browser, not just the parts.
+**It worked everywhere except where users are.** The app only forwards API calls to the backend for paths listed in a routing map that is fixed at build time, and automations were never added to it. For about two weeks the feature couldn't be reached from the browser, while every server-side check passed. Since it was in beta, I found out through a couple of emails and the logs. Fixing it wasn't the slow part: a lot of things needed approval and re-authentication because some access tokens had expired.
 
-**The published package lagged behind the repo.** npm still had version 1.0.0 of the MCP server, while the repo had 1.2.0 with the executor tools. Anyone running `npx` got the old version, never sent heartbeats, and never appeared in the Executors tab. What users install is the product, not what the repo contains.
+**The published package was behind the repo.** npm still had the first version of the MCP server, without the executor tools. Anyone running `npx` got the old version and never showed up as an executor. What users install is the product, not what's in your repo.
 
-**Types that only existed inside the monorepo.** A type exported only from a submodule of a shared package typechecked fine inside the workspace and vanished from the published build. It cost one wasted release.
+**Types that only existed inside the monorepo.** A type exported from a submodule of a shared package worked fine inside the workspace and disappeared from the published build. That cost one wasted release.
 
-## Then I moved it out of the way
+The lesson for me: test the full path, from the browser and from what users actually install, not just each part on its own.
 
-Autopilot is the clearest example of a mistake I've since put a rule against: building the technology first. The rule now is to start from the customer's experience and work back. The reference user is Ana, who asked ChatGPT for a plan and never finished it. Ana doesn't need an automation canvas. She needs her goal turned into a plan, and to do the next step.
+## Where it stands
 
-In September 2026, Syncflow had 21 active accounts and €0 in revenue, built by a solo founder working about 20 hours a week. Its first month brought 500+ sign-ups, but many didn't stay active. At that stage, the first five minutes of the product matter more than any power feature.
-
-So Autopilot came out of the main path. It's gone from the top navigation, the dashboard card and Settings, and lives in the account menu instead, where power users can reach it and first-time users never meet it. I hid it rather than deleting it: the work stays available, it's just not what Syncflow's first experience should be. That stays goal, then plan, then one step at a time.
-
-## What I'd do differently
-
-- **Write Ana's story before the architecture.** The guardrails and the ladder hold up. The order I built things in didn't.
-- **Make "reachable from a browser, installed from npm" the first test**, not something discovered weeks later. Every server-side check passing proved nothing about what a user would actually see.
+Autopilot is in beta. As of October 2026, Syncflow has 1,200+ users, 21 of them paying, and 68 were active in the last three days. The next big step for Autopilot is better task classification, so it knows more accurately which steps it can really take off people's hands.
