@@ -1,6 +1,6 @@
 export interface SocialLink {
-    name: string;
-    url: string;
-    icon: string;
-    navbar: boolean;
+  name: string;
+  url: string;
+  icon: string;
+  navbar: boolean;
 }

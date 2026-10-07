@@ -1,0 +1,51 @@
+{
+  "company": {
+    "name": "Ldvloper",
+    "href": "https://ldvloper.com",
+    "logoUrl": "/images/ventures/ldvloper-icon.png",
+    "role": "Founder",
+    "start": "2025-04",
+    "location": "Warsaw, Poland",
+    "description": "A European software studio. I use it to contract with clients on a B2B basis and to build my own products.",
+    "lines": [
+      {
+        "title": "Client engineering",
+        "text": "My main engagement: senior engineer at Zoloo, on mobile, backend and infrastructure."
+      },
+      {
+        "title": "Products",
+        "text": "Syncflow, designed, built and launched in-house."
+      },
+      {
+        "title": "Security reviews",
+        "text": "Application and cloud security assessments, with hands-on help fixing what they find."
+      }
+    ]
+  },
+  "products": [
+    {
+      "name": "Syncflow",
+      "href": "https://syncflow.me",
+      "linkLabel": "Visit syncflow.me",
+      "iconUrl": "/images/ventures/syncflow-icon.png",
+      "imageUrl": "/images/ventures/syncflow-og.png",
+      "imageAlt": "Syncflow web app showing one step of a goal: Develop pre-launch content, 45 minutes",
+      "role": "Founding engineer",
+      "start": "2026-07",
+      "tagline": "An AI goal planner that breaks any goal into small, time-estimated steps and hands them to you one at a time.",
+      "highlights": [
+        { "value": "500+", "label": "users in the first month" },
+        { "value": "Web + iOS", "label": "live on the App Store" },
+        { "value": "Solo", "label": "design, build and launch" }
+      ],
+      "bullets": [
+        "Built the web app and native iOS app (Swift/SwiftUI) end to end, from product design to launch",
+        "Multi-provider AI (Claude, ChatGPT, Groq, Grok) with bring-your-own-key support",
+        "Calendar sync with Apple, Google and Outlook, plus daily step emails",
+        "**Autopilot**, an agentic assistant with mandatory approval gates and shadow-mode testing before actions run",
+        "Near-zero infrastructure cost by design on Vercel; payments through Apple and Stripe"
+      ],
+      "stack": ["Swift/SwiftUI", "TypeScript", "Vercel", "Stripe", "LLM APIs"]
+    }
+  ]
+}

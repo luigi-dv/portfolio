@@ -1,12 +1,12 @@
 export const HOME_ROUTE = {
-    name: "Home",
-    link: "/"
+  link: '/',
+  name: 'Home',
 };
 export const PROJECTS_ROUTE = {
-    name: "Projects",
-    link: "/projects"
+  link: '/projects',
+  name: 'Projects',
 };
 export const CONTACT_ROUTE = {
-    name: "Contact",
-    link: "/contact"
+  link: '/contact',
+  name: 'Contact',
 };

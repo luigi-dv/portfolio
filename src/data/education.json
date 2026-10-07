@@ -1,0 +1,24 @@
+{
+  "education": [
+    {
+      "school": "Universitat Politècnica de Catalunya (UPC)",
+      "href": "https://www.upc.edu/en",
+      "degree": "Bachelor of Engineering, Telecommunications",
+      "logoUrl": "/images/education/upc.png",
+      "start": "2019-09",
+      "end": "2023-06"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Java Development & Computer Science",
+      "issuer": "Universidad Nebrija",
+      "year": 2022
+    },
+    {
+      "name": "Web Application Development (IFCD0210)",
+      "issuer": "ASEDEM",
+      "year": 2019
+    }
+  ]
+}

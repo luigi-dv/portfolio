@@ -1,1 +1,1 @@
-export { TextMatrix } from "./TextMatrix"
+export { TextMatrix } from './TextMatrix';

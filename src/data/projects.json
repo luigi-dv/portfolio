@@ -1,0 +1,36 @@
+{
+  "projects": [
+    {
+      "title": "Monolith to microservices migration",
+      "context": "Zoloo",
+      "year": "2025–now",
+      "outcome": "Moved 40M+ historical records into new services with zero data loss, while the platform kept serving 20,000+ orders a day.",
+      "stack": ["Python", "FastAPI", "Celery", "RabbitMQ", "MySQL", "AWS"],
+      "private": true
+    },
+    {
+      "title": "Zoloo for iOS",
+      "context": "Zoloo",
+      "year": "2025–now",
+      "outcome": "Native app for bol.com sellers that I own end to end, live on the App Store with passkey sign-in, sales dashboards and an AI assistant.",
+      "stack": ["Swift", "SwiftUI", "Passkeys"],
+      "private": true
+    },
+    {
+      "title": "Applus+ Client Area",
+      "context": "Applus+",
+      "year": "2022–2024",
+      "outcome": "Customer portal for tracking samples, projects and reports. I designed the architecture, built its 3 core services and hardened it for public launch on Azure.",
+      "stack": ["FastAPI", ".NET", "Next.js", "Azure"],
+      "private": true
+    },
+    {
+      "title": "Laboratory planning platform",
+      "context": "Applus+ E&E Laboratories",
+      "year": "2021–2022",
+      "outcome": "Sole developer of the tool 50+ lab staff use to plan projects and share resources.",
+      "stack": ["Laravel", "Vue.js", "MySQL", "Docker"],
+      "private": true
+    }
+  ]
+}

@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
-import { useMemo } from "react";
-import { AnimatePresence, motion, Variants } from "motion/react";
-import { cn } from "@/lib/utils";
+import { useMemo } from 'react';
+
+import { AnimatePresence, motion, Variants } from 'motion/react';
+
+import { cn } from '@/lib/utils';
 
 interface BlurFadeTextProps {
   text: string;
@@ -18,39 +20,39 @@ interface BlurFadeTextProps {
   animateByCharacter?: boolean;
 }
 const BlurFadeText = ({
-  text,
-  className,
-  variant,
-  characterDelay = 0.03,
-  delay = 0,
-  yOffset = 8,
   animateByCharacter = false,
+  characterDelay = 0.03,
+  className,
+  delay = 0,
+  text,
+  variant,
+  yOffset = 8,
 }: BlurFadeTextProps) => {
   const defaultVariants: Variants = {
-    hidden: { y: yOffset, opacity: 0, filter: "blur(8px)" },
-    visible: { y: -yOffset, opacity: 1, filter: "blur(0px)" },
+    hidden: { filter: 'blur(8px)', opacity: 0, y: yOffset },
+    visible: { filter: 'blur(0px)', opacity: 1, y: -yOffset },
   };
   const combinedVariants = variant || defaultVariants;
   const characters = useMemo(() => Array.from(text), [text]);
 
   if (animateByCharacter) {
     return (
-      <div className="flex">
+      <div className='flex'>
         <AnimatePresence>
           {characters.map((char, i) => (
             <motion.span
               key={i}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
+              initial='hidden'
+              animate='visible'
+              exit='hidden'
               variants={combinedVariants}
               transition={{
-                yoyo: Infinity,
                 delay: delay + i * characterDelay,
-                ease: "easeOut",
+                ease: 'easeOut',
+                yoyo: Infinity,
               }}
-              className={cn("inline-block", className)}
-              style={{ width: char.trim() === "" ? "0.2em" : "auto" }}
+              className={cn('inline-block', className)}
+              style={{ width: char.trim() === '' ? '0.2em' : 'auto' }}
             >
               {char}
             </motion.span>
@@ -61,19 +63,19 @@ const BlurFadeText = ({
   }
 
   return (
-    <div className="flex">
+    <div className='flex'>
       <AnimatePresence>
         <motion.span
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
+          initial='hidden'
+          animate='visible'
+          exit='hidden'
           variants={combinedVariants}
           transition={{
-            yoyo: Infinity,
             delay,
-            ease: "easeOut",
+            ease: 'easeOut',
+            yoyo: Infinity,
           }}
-          className={cn("inline-block", className)}
+          className={cn('inline-block', className)}
         >
           {text}
         </motion.span>

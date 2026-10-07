@@ -1,3 +1,3 @@
 export type TextSymbolProps = {
-    primaryText: string;
-}
+  primaryText: string;
+};

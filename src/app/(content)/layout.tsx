@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react';
 
 // Components
-import {NavigationBar} from "@/components/NavigationBar";
+import { NavigationBar } from '@/components/NavigationBar';
 // Services
-import {getNavigationData} from "@/services/navigationService";
-import {getContactData} from "@/services/contactService";
-
+import { getContactData } from '@/services/contactService';
+import { getNavigationData } from '@/services/navigationService';
 
 /**
  * Home Layout
@@ -13,21 +12,24 @@ import {getContactData} from "@/services/contactService";
  * @constructor
  */
 export default async function HomeLayout({
-   children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode;
 }) {
+  const navigationData = await getNavigationData();
+  const contactData = await getContactData();
 
-    const navigationData = await getNavigationData();
-    const contactData = await getContactData();
-
-    return(
-        <>
-                {children}
-            {
-                navigationData && contactData &&
-                <NavigationBar navigation={navigationData.navbar} contact={contactData.contact}/>
-            }
-        </>
-)
+  return (
+    <>
+      <main id='top' className='flex flex-col min-h-[100dvh] gap-y-20'>
+        {children}
+      </main>
+      {navigationData && contactData && (
+        <NavigationBar
+          navigation={navigationData.navbar}
+          contact={contactData.contact}
+        />
+      )}
+    </>
+  );
 }

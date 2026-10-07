@@ -1,5 +1,8 @@
 {
   "navbar": [
-    { "href": "/", "icon": "home", "label": "Home" }
+    { "href": "/#top", "icon": "home", "label": "Home" },
+    { "href": "/#work", "icon": "code", "label": "Selected work" },
+    { "href": "/#experience", "icon": "briefcase", "label": "Experience" },
+    { "href": "/#ventures", "icon": "rocket", "label": "Ldvloper & Syncflow" }
   ]
 }
