@@ -19,6 +19,9 @@ export const Meteors = ({ number = 20, ...props }: MeteorsProps) => {
       left: Math.floor(Math.random() * window.innerWidth) + 'px',
       top: -5,
     }));
+    // Random, window-dependent styles must be computed after mount to avoid a
+    // hydration mismatch, so setting state here is intentional
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMeteorStyles(styles);
   }, [number]);
 

@@ -49,7 +49,6 @@ const BlurFadeText = ({
               transition={{
                 delay: delay + i * characterDelay,
                 ease: 'easeOut',
-                yoyo: Infinity,
               }}
               className={cn('inline-block', className)}
               style={{ width: char.trim() === '' ? '0.2em' : 'auto' }}
@@ -73,7 +72,6 @@ const BlurFadeText = ({
           transition={{
             delay,
             ease: 'easeOut',
-            yoyo: Infinity,
           }}
           className={cn('inline-block', className)}
         >

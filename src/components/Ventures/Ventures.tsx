@@ -25,6 +25,7 @@ const ProductCard = ({ product }: { product: VentureProduct }) => (
         alt={product.imageAlt}
         width={1200}
         height={630}
+        loading={'eager'}
         sizes='(min-width: 672px) 624px, 100vw'
         className='w-full h-auto'
       />

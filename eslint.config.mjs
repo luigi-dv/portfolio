@@ -1,19 +1,8 @@
-import js from "@eslint/js";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { FlatCompat } from "@eslint/eslintrc";
-import perfectionist from 'eslint-plugin-perfectionist'
+import perfectionist from 'eslint-plugin-perfectionist';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    allConfig: js.configs.all,
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended
-});
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default [...compat.extends("next/core-web-vitals"), {
+export default defineConfig([...nextVitals, globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']), {
     plugins: {
         perfectionist,
     },
@@ -78,4 +67,4 @@ export default [...compat.extends("next/core-web-vitals"), {
             version: "detect",
         },
     },
-}];
+}]);
