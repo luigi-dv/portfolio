@@ -73,7 +73,7 @@
           "end": null,
           "intro": "Studio through which I contract with clients on a B2B basis and build my own products.",
           "bullets": [
-            "Built and launched **Syncflow** (syncflow.me), an AI goal planner on web and native iOS, as sole engineer from product design to App Store release; **500+ sign-ups in its first month** and **1,200+ users by October 2026, 21 of them paying**",
+            "Built and launched **Syncflow** (syncflow.me), an AI goal planner on web and native iOS, as sole engineer from product design to App Store release; **50+ sign-ups in its first month** and **1,200+ users by October 2026, 21 of them paying**",
             "Integrated four LLM providers (Claude, ChatGPT, Groq, Grok) with bring-your-own-key support, plus calendar sync with Apple, Google and Outlook and daily step emails",
             "Designed Autopilot, an agentic assistant with mandatory approval gates and shadow-mode testing before any action runs",
             "Kept infrastructure cost near zero by design on Vercel; payments through Apple and Stripe",
