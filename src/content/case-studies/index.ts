@@ -31,7 +31,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'invoicing-migration',
     stack: ['Python', 'FastAPI', 'Celery', 'RabbitMQ', 'MySQL'],
     summary:
-      'The playbook I used to move invoicing out of a monolith: strangler fig by cohort, a transactional outbox, shadow rendering and a verified, resumable backfill of 40M+ records with zero lost.',
+      "How I moved invoicing out of Zoloo's monolith into its own service: shadow mode, the smallest accounts first, and 40M+ records migrated without losing one.",
     title: 'Moving invoicing out of a monolith without losing a record',
   },
   {
