@@ -20,7 +20,6 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'blur-in': 'blur-in 0.6s ease-out both',
         'cell-in': 'cell-in 0.5s ease-out both',
         marquee: 'marquee var(--duration) linear infinite',
         'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
@@ -78,14 +77,6 @@ const config: Config = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
-        },
-        'blur-in': {
-          from: {
-            filter: 'blur(6px)',
-            opacity: '0',
-            transform: 'translateY(6px)',
-          },
-          to: { filter: 'blur(0)', opacity: '1', transform: 'none' },
         },
         'cell-in': {
           from: { opacity: '0' },

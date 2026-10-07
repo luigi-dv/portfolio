@@ -11,12 +11,28 @@
   ],
   "certifications": [
     {
+      "name": "NDG Linux Unhatched",
+      "issuer": "Cisco Networking Academy",
+      "year": 2023
+    },
+    {
       "name": "Java Development & Computer Science",
       "issuer": "Universidad Nebrija",
       "year": 2022
     },
     {
-      "name": "Web Application Development (IFCD0210)",
+      "name": "Agile with Atlassian Jira",
+      "issuer": "Atlassian",
+      "url": "https://www.coursera.org/account/accomplishments/verify/2JF6H8M8LS34?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course",
+      "year": 2022
+    },
+    {
+      "name": "Web Page, Digital/Multimedia and Information Resources Design (IFCD0210_MF0493)",
+      "issuer": "ASEDEM",
+      "year": 2019
+    },
+    {
+      "name": "Web Applications Development in Server Environment (IFCD0210_MF0492)",
       "issuer": "ASEDEM",
       "year": 2019
     }

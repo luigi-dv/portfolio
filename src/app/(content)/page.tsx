@@ -24,8 +24,6 @@ import { CodeActivity, CodeActivitySkeleton } from '@/components/CodeActivity';
 // Regenerate hourly (matches GITHUB_REVALIDATE) so GitHub activity stays fresh
 export const revalidate = 3600;
 
-const HERO_STAGGER = 60;
-
 const Home = async () => {
   const [profile, work, projects, ventures, educationData] = await Promise.all([
     getProfileData(),
@@ -40,88 +38,58 @@ const Home = async () => {
       <header className='space-y-8'>
         <div className='flex items-start justify-between gap-6'>
           <div className='space-y-4'>
-            <div
-              className='animate-blur-in'
-              style={{ animationDelay: `${HERO_STAGGER}ms` }}
-            >
-              <h1 className='font-display text-3xl sm:text-5xl font-bold tracking-tighter leading-[1.05]'>
-                {profile.name}
-              </h1>
-            </div>
-            <div
-              className='animate-blur-in'
-              style={{ animationDelay: `${HERO_STAGGER * 2}ms` }}
-            >
-              <p className='text-lg sm:text-xl text-pretty max-w-md'>
-                {profile.headline}
-              </p>
-            </div>
-            <div
-              className='animate-blur-in'
-              style={{ animationDelay: `${HERO_STAGGER * 3}ms` }}
-            >
-              <p className='inline-flex items-center gap-1.5 text-sm text-muted-foreground'>
-                <MapPinIcon className='size-3.5' aria-hidden='true' />
-                {profile.location}
-              </p>
-            </div>
+            <h1 className='font-display text-3xl sm:text-5xl font-bold tracking-tighter leading-[1.05]'>
+              {profile.name}
+            </h1>
+            <p className='text-lg sm:text-xl text-pretty max-w-md'>
+              {profile.headline}
+            </p>
+            <p className='inline-flex items-center gap-1.5 text-sm text-muted-foreground'>
+              <MapPinIcon className='size-3.5' aria-hidden='true' />
+              {profile.location}
+            </p>
           </div>
-          <div
-            className='animate-blur-in shrink-0'
-            style={{ animationDelay: `${HERO_STAGGER}ms` }}
+          <Avatar className='size-20 sm:size-28 shrink-0 border'>
+            <AvatarImage
+              alt={profile.name}
+              src={profile.avatarUrl}
+              height={112}
+              width={112}
+            />
+            <AvatarFallback>{profile.initials}</AvatarFallback>
+          </Avatar>
+        </div>
+        <div className='flex flex-wrap gap-2'>
+          <a
+            href={`mailto:${profile.email}`}
+            className={cn(buttonVariants(), 'gap-2')}
           >
-            <Avatar className='size-20 sm:size-28 border'>
-              <AvatarImage
-                alt={profile.name}
-                src={profile.avatarUrl}
-                height={112}
-                width={112}
-              />
-              <AvatarFallback>{profile.initials}</AvatarFallback>
-            </Avatar>
-          </div>
+            <Icons.email className='size-4' aria-hidden='true' />
+            Email me
+          </a>
+          <a
+            href={profile.linkedinUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
+          >
+            <Icons.linkedin className='size-4' aria-hidden='true' />
+            LinkedIn
+          </a>
+          <a
+            href={profile.githubUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
+          >
+            <Icons.github className='size-4' aria-hidden='true' />
+            GitHub
+          </a>
         </div>
-        <div
-          className='animate-blur-in'
-          style={{ animationDelay: `${HERO_STAGGER * 4}ms` }}
-        >
-          <div className='flex flex-wrap gap-2'>
-            <a
-              href={`mailto:${profile.email}`}
-              className={cn(buttonVariants(), 'gap-2')}
-            >
-              <Icons.email className='size-4' aria-hidden='true' />
-              Email me
-            </a>
-            <a
-              href={profile.linkedinUrl}
-              target='_blank'
-              rel='noopener noreferrer'
-              className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
-            >
-              <Icons.linkedin className='size-4' aria-hidden='true' />
-              LinkedIn
-            </a>
-            <a
-              href={profile.githubUrl}
-              target='_blank'
-              rel='noopener noreferrer'
-              className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
-            >
-              <Icons.github className='size-4' aria-hidden='true' />
-              GitHub
-            </a>
-          </div>
-        </div>
-        <div
-          className='animate-blur-in'
-          style={{ animationDelay: `${HERO_STAGGER * 5}ms` }}
-        >
-          <div className='space-y-3 text-sm sm:text-base text-muted-foreground text-pretty max-w-prose'>
-            {profile.summary.map((paragraph) => (
-              <p key={paragraph}>{renderInline(paragraph)}</p>
-            ))}
-          </div>
+        <div className='space-y-3 text-sm sm:text-base text-muted-foreground text-pretty max-w-prose'>
+          {profile.summary.map((paragraph) => (
+            <p key={paragraph}>{renderInline(paragraph)}</p>
+          ))}
         </div>
       </header>
 
