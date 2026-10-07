@@ -34,10 +34,30 @@ export const caseStudies: CaseStudy[] = [
       'The playbook I used to move invoicing out of a monolith: strangler fig by cohort, a transactional outbox, shadow rendering and a verified, resumable backfill of 40M+ records with zero lost.',
     title: 'Moving invoicing out of a monolith without losing a record',
   },
+  {
+    company: 'Syncflow',
+    draft: false,
+    facts: [
+      { label: 'Highest autonomy', value: 'Ask first' },
+      { label: 'Daily action cap', value: '20' },
+      { label: 'Shadow period', value: '3 days' },
+    ],
+    load: () => import('./syncflow-autopilot.mdx'),
+    period: '2026',
+    role: 'Founder and sole engineer',
+    slug: 'syncflow-autopilot',
+    stack: ['Next.js', 'TypeScript', 'MCP', 'LLM APIs'],
+    summary:
+      'How I designed Syncflow Autopilot, an AI agent that never finishes a step without asking, built it with parallel AI coding agents, and then moved it out of the main product.',
+    title: 'Building an AI agent that always asks first, then hiding it',
+  },
 ];
 
+/** Drafts show in development, or in a local build run with SHOW_DRAFTS=1 */
 export const isPublished = (study: CaseStudy) =>
-  !study.draft || process.env.NODE_ENV !== 'production';
+  !study.draft ||
+  process.env.NODE_ENV !== 'production' ||
+  process.env.SHOW_DRAFTS === '1';
 
 export const getCaseStudy = (slug: string) =>
   caseStudies.find((study) => study.slug === slug && isPublished(study));

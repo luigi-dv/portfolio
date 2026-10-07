@@ -1,9 +1,10 @@
 import React from 'react';
 
 import Image from 'next/image';
-import { ArrowUpRightIcon } from 'lucide-react';
 import { renderInline } from '@/utilities/markdown';
+import { getCaseStudy } from '@/content/case-studies';
 import { formatMonth, formatPeriod } from '@/utilities/date';
+import { ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -70,6 +71,18 @@ const ProductCard = ({ product }: { product: VentureProduct }) => (
           <li key={bullet}>{renderInline(bullet)}</li>
         ))}
       </ul>
+
+      {product.caseStudy && getCaseStudy(product.caseStudy) && (
+        <TrackedLink
+          href={`/work/${product.caseStudy}`}
+          event='Case study open'
+          eventData={{ project: product.name }}
+          className='inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline'
+        >
+          Read how I built Autopilot
+          <ArrowRightIcon className='size-3.5' aria-hidden='true' />
+        </TrackedLink>
+      )}
 
       <div className='flex flex-wrap items-center justify-between gap-4'>
         <ul className='flex flex-wrap gap-1.5' aria-label='Built with'>

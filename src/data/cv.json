@@ -30,7 +30,7 @@
       }
     ]
   },
-  "summary": "Senior full-stack engineer with 5+ years taking products from architecture to production across web, native iOS, Python backends and AWS/Azure cloud. At **Zoloo**, a SaaS platform for bol.com sellers (€2.5B+ in member sales, 20,000+ orders a day), I own the native iOS app and lead the move from a monolith to microservices, including 40M+ records migrated with zero data loss in production. As founder of **Ldvloper**, I designed, built and launched **Syncflow**, an AI goal planner on web and iOS that reached 500+ users in its first month.",
+  "summary": "Senior full-stack engineer with 5+ years taking products from architecture to production across web, native iOS, Python backends and AWS/Azure cloud. At **Zoloo**, a SaaS platform for bol.com sellers (€2.5B+ in member sales, 20,000+ orders a day), I own the native iOS app and lead the move from a monolith to microservices, including 40M+ records migrated with zero data loss in production. As founder of **Ldvloper**, I designed, built and launched **Syncflow**, an AI goal planner on web and iOS that reached 500+ sign-ups in its first month.",
   "experience": [
     {
       "company": "Zoloo (formerly Boloo)",
@@ -73,7 +73,7 @@
           "end": null,
           "intro": "Studio through which I contract with clients on a B2B basis and build my own products.",
           "bullets": [
-            "Built and launched **Syncflow** (syncflow.me), an AI goal planner on web and native iOS, as sole engineer from product design to App Store release; **500+ users in its first month**",
+            "Built and launched **Syncflow** (syncflow.me), an AI goal planner on web and native iOS, as sole engineer from product design to App Store release; **500+ sign-ups in its first month**",
             "Integrated four LLM providers (Claude, ChatGPT, Groq, Grok) with bring-your-own-key support, plus calendar sync with Apple, Google and Outlook and daily step emails",
             "Designed Autopilot, an agentic assistant with mandatory approval gates and shadow-mode testing before any action runs",
             "Kept infrastructure cost near zero by design on Vercel; payments through Apple and Stripe",

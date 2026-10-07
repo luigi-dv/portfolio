@@ -28,6 +28,7 @@
       "href": "https://syncflow.me",
       "linkLabel": "Visit syncflow.me",
       "appStoreUrl": "https://apps.apple.com/us/app/syncflow-ai-goal-planner/id6792511758",
+      "caseStudy": "syncflow-autopilot",
       "iconUrl": "/images/ventures/syncflow-icon.png",
       "imageUrl": "/images/ventures/syncflow-og.png",
       "imageAlt": "Syncflow web app showing one step of a goal: Develop pre-launch content, 45 minutes",
@@ -37,7 +38,7 @@
       "highlights": [
         {
           "value": "500+",
-          "label": "users in the first month"
+          "label": "sign-ups in the first month"
         },
         {
           "value": "Web + iOS",

@@ -72,7 +72,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </p>
       </header>
 
-      <div className='prose prose-neutral dark:prose-invert max-w-none text-pretty prose-headings:font-display prose-headings:tracking-tight prose-h2:text-lg prose-h2:mt-10 prose-a:text-primary prose-li:my-1'>
+      <div className='prose prose-neutral dark:prose-invert max-w-none text-pretty prose-headings:font-display prose-headings:tracking-tight prose-h2:text-lg prose-h2:mt-10 prose-a:text-primary prose-li:my-1 prose-code:before:content-none prose-code:after:content-none prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:font-normal prose-code:text-[0.875em] prose-pre:bg-muted prose-pre:text-foreground'>
         <Content />
       </div>
     </article>

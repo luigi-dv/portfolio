@@ -15,6 +15,8 @@ export interface VentureProduct {
   href: string;
   linkLabel: string;
   appStoreUrl?: string;
+  /** Slug of a case study in src/content/case-studies */
+  caseStudy?: string;
   iconUrl: string;
   imageUrl: string;
   imageAlt: string;
