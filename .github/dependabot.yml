@@ -9,6 +9,11 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # Tailwind 4 is a different setup (CSS-first config, @tailwindcss/postcss),
+      # so it gets a deliberate migration PR rather than a version bump
+      - dependency-name: tailwindcss
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: github-actions
     directory: /

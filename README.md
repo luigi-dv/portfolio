@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# luigelo.ldvloper.com
 
-## Getting Started
+[![The portfolio home page: name, headline, contact buttons, a short bio and the start of the Selected work section](.github/screenshot.png)](https://luigelo.ldvloper.com)
 
-First, run the development server:
+My portfolio, live at **[luigelo.ldvloper.com](https://luigelo.ldvloper.com)**. It holds two engineering case studies (a production migration of 40M+ records out of a monolith, and an AI agent that always asks before acting), my experience, testimonials, a GitHub contribution graph and a CV you can download.
+
+Built with Next.js 16 (App Router), React 19 and TypeScript, styled with Tailwind CSS and Radix UI primitives, with MDX for the case studies and Motion for the animations. The contribution graph comes from the GitHub GraphQL API, fetched on the server and revalidated hourly. Hosted on Vercel, with Vercel Analytics and Speed Insights.
+
+## Run it locally
+
+Needs Node 24 (see `.nvmrc`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+cp .env.example .env   # optional: a GitHub token for the contribution graph
+npm run dev            # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`npm run lint` checks the code. `npm run cv:export` builds the site and prints `/cv` to `public/cv/` as a PDF with headless Chrome (set `CHROME_PATH` if Chrome is not in the default macOS location).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How it's put together
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Case studies are MDX files in `src/content/case-studies`, registered in a typed index that holds their metadata (company, period, stack, key facts) and a `draft` flag, so a study can be previewed in development and stays a 404 in production until it is ready. I chose MDX because the write-ups embed React diagrams next to the prose, which plain Markdown or a CMS would not allow. Everything else on the page (profile, experience, projects, testimonials) is JSON in `src/data`, so copy edits never touch a component. The CV is a page, `/cv`, that a GitHub Action prints to PDF and commits whenever its content changes, so the download never drifts from the site.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The source code is released under the [MIT License](LICENSE). The content is not: the texts, case studies, images, CV and personal data are © Luigelo Davila and may not be copied or reused without permission.

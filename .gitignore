@@ -38,3 +38,6 @@ next-env.d.ts
 
 # Client-confidential drafts: never commit (see private/README.md)
 /private/
+
+# IDE
+.idea/
