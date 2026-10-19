@@ -1,0 +1,79 @@
+In 2026 I built two native iOS apps on my own: the seller app for an e-commerce analytics platform I work for as a contractor, and the iPhone and iPad app for Syncflow, my own product. Different products, same playbook. This is the story of that playbook and where it was tested.
+
+## The problem
+
+The analytics platform helps online sellers follow revenue, profit, orders and stock. Sellers check those numbers on their phone many times a day, so the mobile app matters more than the dashboard. Since 2024 I had led its cross-platform app in React Native. It worked, but the features sellers asked for next were the ones iOS does best: a home-screen widget with today's sales, a Live Activity while the AI assistant writes an answer, passkeys and Face ID. In React Native each of those is a native bridge to write and keep alive. So we decided to go native, and I started a SwiftUI app from an empty project in March 2026.
+
+A few months later Syncflow had the same gap. It already had a web app and an MCP server, but people plan on their phones, and a wrapped web view would not feel like a real app. I started its native client in July.
+
+## My role
+
+Sole iOS engineer on both apps: architecture, code, tests, CI on Xcode Cloud, App Store submissions and the store screenshots. On the analytics platform I also work on the backend services, which helped more than I expected: when an endpoint didn't fit the app, I could change the endpoint instead of working around it.
+
+<Screens
+  caption={
+    <>
+      The analytics app: the summary sellers open first, and the AI assistant.{' '}
+      <Illustrative>Every figure on these screens</Illustrative> is demo data,
+      not client data.
+    </>
+  }
+>
+  <Shot
+    src='analytics-summary.webp'
+    alt='Summary screen with profit and revenue highlights compared with last year, and a revenue chart'
+  />
+  <Shot
+    src='analytics-assistant.webp'
+    alt='Assistant screen with a list of past conversations and an empty tasks section'
+  />
+</Screens>
+
+## Key decisions
+
+**The backend stays the source of truth.** Both apps are thin clients. The phone keeps a cache it can throw away, never a second copy of the data: no CloudKit, no sync engine. Web, mobile and (for Syncflow) AI agents all read and write the same backend, so there is one place where data can be wrong, not three.
+
+**Few layers, owned by one person.** SwiftUI with `@Observable` stores, one folder per feature, and a core layer with no UI that owns networking, tokens and the cache. No Redux-style architecture: it is a lot of ceremony for a team of one, and every new screen would pay for it. The network client is an actor, tokens live in the Keychain, and writes are optimistic with a rollback when the server says no.
+
+<NativeClientDiagram />
+
+**The widget fetches on its own.** The widget and the Live Activity read the token from a shared Keychain and make their own request. They never refresh the token: if it has expired they show the last cached numbers. A widget that is a little stale is fine. A widget that signs the user out is not.
+
+**New iOS features behind one file.** Both apps support iOS 18 and use iOS 26's Liquid Glass. Every iOS 26 call goes through a single compatibility file with an iOS 18 fallback, so supporting the older version is one place to read instead of `if #available` checks spread across every screen.
+
+**No real data in a screenshot, ever.** App Store screenshots usually come from a test account or a real one with the names blurred. I didn't want either, so both apps have a demo mode that only exists in debug builds. A UI test launches the real app with a flag, the demo mode signs in a fake user and swaps in a network stub, and every API call is answered from one catalog of fake products, orders and plans. The app doesn't know the difference, so the screenshots show the real screens.
+
+<DemoModeDiagram />
+
+Because the dates are anchored to today, every run gives the same screens with fresh data. Changing what the store shows means editing one file, and nobody ever has to decide which customer's data is safe to show.
+
+<Screens caption='Syncflow on iPhone: today, a plan broken into steps, and Autopilot asking before it acts. Captured by the demo mode, in English here and in five other languages for the store.'>
+  <Shot
+    src='syncflow-today.webp'
+    alt='Today screen with the next step, a day streak and estimate accuracy'
+  />
+  <Shot
+    src='syncflow-plan.webp'
+    alt='A plan for a product launch webinar broken into eight timed steps'
+  />
+  <Shot
+    src='syncflow-autopilot.webp'
+    alt='Autopilot screen with two drafts waiting for approval, each with Go ahead and Not now buttons'
+  />
+</Screens>
+
+## Obstacles
+
+**A rename that couldn't break sign-in.** In the autumn the analytics product got a new name and a new domain. Passkeys are tied to the domain they were created on, so moving everything to the new domain would have locked out every user who signed in with one. New passkeys are now created on the new domain while existing ones keep working on the old one. Everything users see says the new name, but the internal identifiers (URL schemes, Keychain keys, widget kinds) kept the old one on purpose: renaming them would have removed the widgets people had placed and broken every deep link already out there.
+
+**Six languages, and the grammar fought back.** Syncflow ships in English, Spanish, German, Polish, Ukrainian and Brazilian Portuguese. A count with a suffix reads fine in English and is wrong in four of the six languages, so every count became a real plural. The launch tests looked for English labels and failed ten of twelve runs once the app spoke six languages, so they now look for identifiers. A layout check on the smallest iPhone caught German and Polish labels pushing task titles off the screen. And a strict catalog check means a new string can't be merged without its five translations.
+
+**Tests that could reach the real App Store.** Syncflow sells a subscription with StoreKit 2, and its unit tests run inside the full app. Moving one StoreKit config file was enough to make tests fall through to Apple's sandbox store, so I added guards in the purchase code and a test that fails fast if the config is missing. Then an Xcode 26 regression made purchases deadlock in hosted tests. Instead of a workaround that would hang the whole suite, I disabled the four affected tests with the reason written next to them, to turn back on when Apple fixes the toolchain.
+
+**A backend that wasn't ready.** Syncflow's backend only knew browser sessions. Native Sign in with Apple needed it to accept a bearer token and to know the app's bundle ID, so the first iOS milestone was a backend change, shipped before the app could sign anyone in.
+
+## Outcome
+
+Both apps are live on the App Store. The analytics app ships about once a month, in three languages, with widgets, a Live Activity, passkeys, Siri Shortcuts and a streaming AI assistant. Syncflow is on version 1.3 in six languages, on iPhone and iPad. Together that's around 75,000 lines of Swift and more than 600 automated tests, and one command per app regenerates every store screenshot on every device in every language.
+
+What I'd keep doing: decide early what the phone is allowed to own, and build the demo mode on day one. It started as a way to make screenshots, and it also gives me a signed-in app full of realistic data whenever I need one, without touching anyone's account.
