@@ -22,6 +22,18 @@ npm run dev            # http://localhost:3000
 
 Case studies are MDX files in `src/content/case-studies`, registered in a typed index that holds their metadata (company, period, stack, key facts) and a `draft` flag, so a study can be previewed in development and stays a 404 in production until it is ready. I chose MDX because the write-ups embed React diagrams next to the prose, which plain Markdown or a CMS would not allow. Everything else on the page (profile, experience, projects, testimonials) is JSON in `src/data`, so copy edits never touch a component. The CV is a page, `/cv`, that a GitHub Action prints to PDF and commits whenever its content changes, so the download never drifts from the site.
 
+## Shared case studies
+
+Some case studies are not listed anywhere and are only reachable through a private link, `/case/<id>`, made once per recipient. They live in `src/content/shared-studies` and never name the client; figures that could be confidential are wrapped in `<Illustrative>` and marked with a †.
+
+```bash
+npm run case:new -- --for "Who it went to"   # prints the URL; --study defaults to native-ios
+npm run case:list                             # every link, its expiry and recipient
+npm run case:purge -- --dry-run               # then without --dry-run, and commit
+```
+
+`case:new` adds the id and its creation time to `links.json` and copies the study's screenshots to `public/case-assets/<id>/`. Who received a link goes only to the gitignored `private/case-links.json`. A link works for 30 days (`ttlDays`): the page renders on every request and answers 404 once it has expired, and `src/proxy.ts` does the same for its screenshots. `case:purge` then deletes expired links and their asset folders. Purged files stay in git history.
+
 ## License
 
 The source code is released under the [MIT License](LICENSE). The content is not: the texts, case studies, images, CV and personal data are © Luigelo Davila and may not be copied or reused without permission.

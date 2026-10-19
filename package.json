@@ -10,6 +10,9 @@
     "build": "next build",
     "start": "next start",
     "cv:export": "next build && node scripts/export-cv.mjs",
+    "case:new": "node scripts/case-links.mjs new",
+    "case:list": "node scripts/case-links.mjs list",
+    "case:purge": "node scripts/case-links.mjs purge",
     "lint": "eslint .",
     "prepare": "husky",
     "pre-commit": "lint-staged"
