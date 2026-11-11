@@ -1,13 +1,13 @@
 import React from 'react';
 
+import { CaseStudyArticle } from '@/components/CaseStudyArticle';
+
 import type { Metadata } from 'next';
 
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeftIcon } from 'lucide-react';
 import { caseStudies, getCaseStudy, isPublished } from '@/content/case-studies';
-
-import { CaseStudyArticle } from '@/components/CaseStudyArticle';
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>;

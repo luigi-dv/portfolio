@@ -1,14 +1,16 @@
 import React from 'react';
 
+import { TooltipProvider } from '@/components/ui/tooltip';
+
+import { cn } from '@/lib/utils';
+
+import { ThemeProvider } from '@/providers/ThemeProvider';
+
 import type { Metadata } from 'next';
 
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Instrument_Sans, Unbounded } from 'next/font/google';
-
-import { cn } from '@/lib/utils';
-import { ThemeProvider } from '@/providers/ThemeProvider';
-import { TooltipProvider } from '@/components/ui/tooltip';
 
 import './globals.css';
 

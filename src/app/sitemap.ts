@@ -1,8 +1,8 @@
+import profile from '@/data/profile.json';
+
 import type { MetadataRoute } from 'next';
 
 import { caseStudies, isPublished } from '@/content/case-studies';
-
-import profile from '@/data/profile.json';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

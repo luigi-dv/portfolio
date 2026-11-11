@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { TrackedLink } from '@/components/TrackedLink';
+
 import { ArrowRightIcon } from 'lucide-react';
 import { CaseStudy } from '@/content/case-studies';
-
-import { TrackedLink } from '@/components/TrackedLink';
 
 /**
  * Prominent card for a case study: context, title, summary and key facts.

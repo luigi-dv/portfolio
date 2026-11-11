@@ -1,10 +1,11 @@
+import { getProfileData } from '@/services/profileService';
+import { getGitHubActivity } from '@/services/githubService';
+
+import { ContributionLevel } from '@/types/GitHubActivity';
+
 import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
-
-import { getProfileData } from '@/services/profileService';
-import { ContributionLevel } from '@/types/GitHubActivity';
-import { getGitHubActivity } from '@/services/githubService';
 
 export const alt = 'Luigelo Davila, full-stack engineer';
 export const size = { height: 630, width: 1200 };
@@ -64,117 +65,115 @@ export default async function OpengraphImage() {
   ]).catch(() => undefined);
 
   return new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'white',
-          color: '#09090B',
-          display: 'flex',
-          flexDirection: 'column',
-          fontFamily: 'Instrument Sans',
-          height: '100%',
-          justifyContent: 'space-between',
-          padding: 72,
-          width: '100%',
-        }}
-      >
-        <div style={{ alignItems: 'flex-start', display: 'flex', gap: 48 }}>
-          <div
-            style={{
-              display: 'flex',
-              flex: 1,
-              flexDirection: 'column',
-              gap: 24,
-            }}
-          >
-            <div
-              style={{
-                fontFamily: 'Unbounded',
-                fontSize: 76,
-                fontWeight: 700,
-                letterSpacing: -3,
-                lineHeight: 1,
-              }}
-            >
-              {profile.name}
-            </div>
-            <div style={{ color: '#3F3F46', fontSize: 36, lineHeight: 1.3 }}>
-              {profile.headline}
-            </div>
-          </div>
-          {}
-          <img
-            src={avatarSrc}
-            alt=''
-            width={180}
-            height={180}
-            style={{ border: '1px solid #E4E4E7', borderRadius: 9999 }}
-          />
-        </div>
-
+    <div
+      style={{
+        background: 'white',
+        color: '#09090B',
+        display: 'flex',
+        flexDirection: 'column',
+        fontFamily: 'Instrument Sans',
+        height: '100%',
+        justifyContent: 'space-between',
+        padding: 72,
+        width: '100%',
+      }}
+    >
+      <div style={{ alignItems: 'flex-start', display: 'flex', gap: 48 }}>
         <div
           style={{
-            alignItems: 'flex-end',
             display: 'flex',
-            justifyContent: 'space-between',
+            flex: 1,
+            flexDirection: 'column',
+            gap: 24,
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {profile.availability && (
+          <div
+            style={{
+              fontFamily: 'Unbounded',
+              fontSize: 76,
+              fontWeight: 700,
+              letterSpacing: -3,
+              lineHeight: 1,
+            }}
+          >
+            {profile.name}
+          </div>
+          <div style={{ color: '#3F3F46', fontSize: 36, lineHeight: 1.3 }}>
+            {profile.headline}
+          </div>
+        </div>
+        {}
+        <img
+          src={avatarSrc}
+          alt=''
+          width={180}
+          height={180}
+          style={{ border: '1px solid #E4E4E7', borderRadius: 9999 }}
+        />
+      </div>
+
+      <div
+        style={{
+          alignItems: 'flex-end',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {profile.availability && (
+            <div
+              style={{
+                alignItems: 'center',
+                display: 'flex',
+                fontSize: 26,
+                gap: 12,
+                lineHeight: 1.3,
+                maxWidth: 560,
+              }}
+            >
               <div
                 style={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  fontSize: 26,
-                  gap: 12,
-                  lineHeight: 1.3,
-                  maxWidth: 560,
+                  background: '#10B981',
+                  borderRadius: 9999,
+                  flexShrink: 0,
+                  height: 14,
+                  width: 14,
                 }}
-              >
-                <div
-                  style={{
-                    background: '#10B981',
-                    borderRadius: 9999,
-                    flexShrink: 0,
-                    height: 14,
-                    width: 14,
-                  }}
-                />
-                {profile.availability}
-              </div>
-            )}
-            <div style={{ color: PRIMARY, fontSize: 26 }}>{domain}</div>
-          </div>
-          {weeks.length > 0 && (
-            <div style={{ display: 'flex', gap: 4 }}>
-              {weeks.map((week) => (
-                <div
-                  key={week[0].date}
-                  style={{ display: 'flex', flexDirection: 'column', gap: 4 }}
-                >
-                  {week.map((day) => (
-                    <div
-                      key={day.date}
-                      style={{
-                        background:
-                          day.contributionLevel === 'NONE' ? MUTED : PRIMARY,
-                        borderRadius: 2,
-                        height: 10,
-                        opacity:
-                          day.contributionLevel === 'NONE'
-                            ? 1
-                            : LEVEL_OPACITY[day.contributionLevel],
-                        width: 10,
-                      }}
-                    />
-                  ))}
-                </div>
-              ))}
+              />
+              {profile.availability}
             </div>
           )}
+          <div style={{ color: PRIMARY, fontSize: 26 }}>{domain}</div>
         </div>
+        {weeks.length > 0 && (
+          <div style={{ display: 'flex', gap: 4 }}>
+            {weeks.map((week) => (
+              <div
+                key={week[0].date}
+                style={{ display: 'flex', flexDirection: 'column', gap: 4 }}
+              >
+                {week.map((day) => (
+                  <div
+                    key={day.date}
+                    style={{
+                      background:
+                        day.contributionLevel === 'NONE' ? MUTED : PRIMARY,
+                      borderRadius: 2,
+                      height: 10,
+                      opacity:
+                        day.contributionLevel === 'NONE'
+                          ? 1
+                          : LEVEL_OPACITY[day.contributionLevel],
+                      width: 10,
+                    }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    ),
+    </div>,
     { ...size, fonts }
   );
 }

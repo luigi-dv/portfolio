@@ -1,5 +1,6 @@
-import { Cv } from '@/types/Cv';
 import cvData from '@/data/cv.json';
+
+import { Cv } from '@/types/Cv';
 
 /**
  * CV content, kept separate from the site data so it can be tuned for

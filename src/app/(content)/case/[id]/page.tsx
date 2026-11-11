@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { CaseStudyArticle } from '@/components/CaseStudyArticle';
+import { ILLUSTRATIVE_NOTE, Shot } from '@/components/CaseStudy';
+
 import type { Metadata } from 'next';
 
 import Link from 'next/link';
@@ -8,9 +11,6 @@ import { notFound } from 'next/navigation';
 import { ArrowLeftIcon } from 'lucide-react';
 import { getSharedStudy } from '@/content/shared-studies';
 import { ASSETS_PATH, expiresAt } from '@/content/shared-studies/links';
-
-import { CaseStudyArticle } from '@/components/CaseStudyArticle';
-import { ILLUSTRATIVE_NOTE, Shot } from '@/components/CaseStudy';
 
 interface SharedCasePageProps {
   params: Promise<{ id: string }>;

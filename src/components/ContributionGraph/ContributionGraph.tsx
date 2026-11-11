@@ -1,8 +1,8 @@
 import React from 'react';
 
-import dayjs from 'dayjs';
-
 import { ContributionDay, ContributionLevel } from '@/types/GitHubActivity';
+
+import dayjs from 'dayjs';
 
 const CELL = 10;
 const GAP = 3;

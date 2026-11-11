@@ -1,19 +1,21 @@
 import React from 'react';
 
-import Link from 'next/link';
-
-import { cn } from '@/lib/utils';
-import { iconMap } from '@/lib/utils/iconMap';
 import { Dock, DockIcon } from '@/components/Dock';
 import { ModeToggle } from '@/components/ModeToggle';
 import { Separator } from '@/components/ui/separator';
 import { buttonVariants } from '@/components/ui/button';
-import { NavigationBarProps } from '@/types/NavigationBarProps';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+
+import { cn } from '@/lib/utils';
+import { iconMap } from '@/lib/utils/iconMap';
+
+import { NavigationBarProps } from '@/types/NavigationBarProps';
+
+import Link from 'next/link';
 
 export async function NavigationBar(props: NavigationBarProps) {
   const { contact, navigation } = props;
