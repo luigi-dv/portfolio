@@ -1,8 +1,10 @@
-import { getCaseStudy } from '@/content/case-studies';
+import projectData from '@/data/projects.json';
+
+import { getRepository } from '@/services/githubService';
 
 import { Project } from '@/types/Project';
-import projectData from '@/data/projects.json';
-import { getRepository } from '@/services/githubService';
+
+import { getCaseStudy } from '@/content/case-studies';
 
 /**
  * Featured projects, enriched with live GitHub data when a public repo is set.

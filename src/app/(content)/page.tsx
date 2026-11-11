@@ -1,5 +1,28 @@
 import React, { Suspense } from 'react';
 
+import { Icons } from '@/components/Icons';
+import { Badge } from '@/components/ui/badge';
+import { Section } from '@/components/Section';
+import { Ventures } from '@/components/Ventures';
+import { ProjectList } from '@/components/ProjectList';
+import { TrackedLink } from '@/components/TrackedLink';
+import { buttonVariants } from '@/components/ui/button';
+import { PersonJsonLd } from '@/components/PersonJsonLd';
+import { CaseStudyCard } from '@/components/CaseStudyCard';
+import { ExperienceTimeline } from '@/components/ExperienceTimeline';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { CodeActivity, CodeActivitySkeleton } from '@/components/CodeActivity';
+
+import { cn } from '@/lib/utils';
+
+import { getWorkData } from '@/services/workService';
+import { getProjects } from '@/services/projectService';
+import { getContactData } from '@/services/contactService';
+import { getProfileData } from '@/services/profileService';
+import { getVentureData } from '@/services/ventureService';
+import { getEducationData } from '@/services/educationService';
+import { getTestimonialData } from '@/services/testimonialService';
+
 import { renderInline } from '@/utilities/markdown';
 import { formatMonth, formatPeriod } from '@/utilities/date';
 import { caseStudies, getCaseStudy, isPublished } from '@/content/case-studies';
@@ -9,27 +32,6 @@ import {
   DownloadIcon,
   MapPinIcon,
 } from 'lucide-react';
-
-import { cn } from '@/lib/utils';
-import { Icons } from '@/components/Icons';
-import { Badge } from '@/components/ui/badge';
-import { Section } from '@/components/Section';
-import { Ventures } from '@/components/Ventures';
-import { getWorkData } from '@/services/workService';
-import { ProjectList } from '@/components/ProjectList';
-import { TrackedLink } from '@/components/TrackedLink';
-import { buttonVariants } from '@/components/ui/button';
-import { getProjects } from '@/services/projectService';
-import { PersonJsonLd } from '@/components/PersonJsonLd';
-import { CaseStudyCard } from '@/components/CaseStudyCard';
-import { getContactData } from '@/services/contactService';
-import { getProfileData } from '@/services/profileService';
-import { getVentureData } from '@/services/ventureService';
-import { getEducationData } from '@/services/educationService';
-import { getTestimonialData } from '@/services/testimonialService';
-import { ExperienceTimeline } from '@/components/ExperienceTimeline';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CodeActivity, CodeActivitySkeleton } from '@/components/CodeActivity';
 
 // Regenerate hourly (matches GITHUB_REVALIDATE) so GitHub activity stays fresh
 export const revalidate = 3600;
@@ -131,16 +133,6 @@ const Home = async () => {
           >
             <Icons.github className='size-4' aria-hidden='true' />
             GitHub
-          </TrackedLink>
-          <TrackedLink
-            event='CV download'
-            eventData={{ location: 'hero' }}
-            href={profile.cvUrl}
-            download
-            className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
-          >
-            <DownloadIcon className='size-4' aria-hidden='true' />
-            Download CV
           </TrackedLink>
         </div>
         <div className='space-y-3 text-sm sm:text-base text-muted-foreground text-pretty max-w-prose'>

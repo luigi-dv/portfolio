@@ -1,5 +1,11 @@
 import React from 'react';
 
+import { buttonVariants } from '@/components/ui/button';
+
+import { cn } from '@/lib/utils';
+
+import { getCvData } from '@/services/cvService';
+
 import type { Metadata } from 'next';
 
 import Link from 'next/link';
@@ -7,10 +13,6 @@ import Image from 'next/image';
 import { renderInline } from '@/utilities/markdown';
 import { ArrowLeftIcon, DownloadIcon } from 'lucide-react';
 import { formatMonth, formatPeriod } from '@/utilities/date';
-
-import { cn } from '@/lib/utils';
-import { getCvData } from '@/services/cvService';
-import { buttonVariants } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   description: 'CV of Luigelo Davila, senior full-stack engineer.',

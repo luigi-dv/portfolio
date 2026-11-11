@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Link from 'next/link';
+import { ContributionGraph } from '@/components/ContributionGraph';
 
 import { getGitHubActivity } from '@/services/githubService';
-import { ContributionGraph } from '@/components/ContributionGraph';
+
+import Link from 'next/link';
 
 const formatNumber = (value: number) => value.toLocaleString('en-US');
 

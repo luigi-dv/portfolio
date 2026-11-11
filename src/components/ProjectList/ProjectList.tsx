@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { TrackedLink } from '@/components/TrackedLink';
+
+import { Project } from '@/types/Project';
+import { GitHubRepository } from '@/types/GitHubActivity';
+
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
@@ -8,10 +13,6 @@ import {
   LockIcon,
   StarIcon,
 } from 'lucide-react';
-
-import { Project } from '@/types/Project';
-import { TrackedLink } from '@/components/TrackedLink';
-import { GitHubRepository } from '@/types/GitHubActivity';
 
 dayjs.extend(relativeTime);
 

@@ -1,16 +1,18 @@
 import React from 'react';
 
+import { Badge } from '@/components/ui/badge';
+import { TrackedLink } from '@/components/TrackedLink';
+import { buttonVariants } from '@/components/ui/button';
+
+import { cn } from '@/lib/utils';
+
+import { Ventures as VenturesData, VentureProduct } from '@/types/Venture';
+
 import Image from 'next/image';
 import { renderInline } from '@/utilities/markdown';
 import { getCaseStudy } from '@/content/case-studies';
 import { formatMonth, formatPeriod } from '@/utilities/date';
 import { ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react';
-
-import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
-import { TrackedLink } from '@/components/TrackedLink';
-import { buttonVariants } from '@/components/ui/button';
-import { Ventures as VenturesData, VentureProduct } from '@/types/Venture';
 
 const ProductCard = ({ product }: { product: VentureProduct }) => (
   <article className='overflow-hidden rounded-xl border bg-card'>

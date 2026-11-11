@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react';
 
+import { Icons } from '@/components/Icons';
+
 import {
   BriefcaseIcon,
   CodeIcon,
@@ -7,8 +9,6 @@ import {
   NotebookIcon,
   RocketIcon,
 } from 'lucide-react';
-
-import { Icons } from '@/components/Icons';
 
 export const iconMap: Record<
   string,

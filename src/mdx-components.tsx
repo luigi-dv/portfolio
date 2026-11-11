@@ -1,5 +1,3 @@
-import type { MDXComponents } from 'mdx/types';
-
 import {
   AutopilotDiagram,
   DemoModeDiagram,
@@ -9,6 +7,8 @@ import {
   Screens,
   Todo,
 } from '@/components/CaseStudy';
+
+import type { MDXComponents } from 'mdx/types';
 
 /**
  * Components available in every MDX file. Typography comes from the

@@ -1,4 +1,5 @@
 import { githubGraphQL } from '@/lib/github';
+
 import { GitHubRepository } from '@/types/GitHubActivity';
 
 const REPOSITORY_QUERY = /* GraphQL */ `

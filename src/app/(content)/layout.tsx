@@ -2,6 +2,7 @@ import React from 'react';
 
 // Components
 import { NavigationBar } from '@/components/NavigationBar';
+
 // Services
 import { getContactData } from '@/services/contactService';
 import { getNavigationData } from '@/services/navigationService';

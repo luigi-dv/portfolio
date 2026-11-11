@@ -2,13 +2,15 @@
 
 import React, { useId, useState } from 'react';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+import { cn } from '@/lib/utils';
+
+import { WorkItem, WorkRole } from '@/types/WorkItem';
+
 import { ChevronDownIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { formatDuration, formatPeriod } from '@/utilities/date';
-
-import { cn } from '@/lib/utils';
-import { WorkItem, WorkRole } from '@/types/WorkItem';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Role = ({
   defaultOpen,

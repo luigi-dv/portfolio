@@ -1,4 +1,5 @@
 import { githubGraphQL } from '@/lib/github';
+
 import { ContributionDay, GitHubActivity } from '@/types/GitHubActivity';
 
 const ACTIVITY_QUERY = /* GraphQL */ `
